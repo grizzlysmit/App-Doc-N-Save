@@ -51,19 +51,19 @@ Doc-N-Save
 SUBTITLE
 ========
 
-A collection of Raku programs for displaying lines in a listing.
+A collection of **Raku** programs for managing modules and apps in **Raku**, and do things like summit to zef etc.
 
 COPYRIGHT
 =========
 
-GPL V3.0+ [LICENSE](https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE)
+GPL V3.0+ [LICENSE](https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE)
 
 [Top of Document](#table-of-contents)
 
 Introduction
 ============
 
-A collection of **Raku** programs for managing modules and apps in **Raku**. 
+A collection of **Raku** programs for managing modules and apps in **Raku**, and do things like summit to zef etc. 
 
   * B`doc-n-save`> a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.
 

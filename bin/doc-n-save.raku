@@ -32,16 +32,17 @@ Table of Contents
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
 =VERSION 0.1.0
 =TITLE Doc-N-Save
-=SUBTITLE A collection of Raku programs for displaying lines in a listing.
+=SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
 =COPYRIGHT
-GPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE>
+GPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE>
 
 L<Top of Document|#table-of-contents>
 
 =head1 Introduction
 
-A collection of B<Raku> programs for managing modules and apps in B<Raku>. 
+A collection of B<Raku> programs for managing modules and apps in B<Raku>,  
+and do things like summit to zef etc. 
 =begin item1
 
 BC<doc-n-save>> a program for generating Documentation from pod files

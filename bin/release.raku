@@ -27,7 +27,7 @@ Table of Contents
 =SUBTITLE A Raku module for displaying lines in a listing.
 
 =COPYRIGHT
-LGPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE>
+LGPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE>
 
 L<Top of Document|#table-of-contents>
 

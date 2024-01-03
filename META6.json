@@ -1,6 +1,6 @@
 {
     "name" : "App::Doc-N-Save",
-    "description" : "A set of Raku programs for managing Raku modules and apps.",
+    "description" : "A collection of Raku programs for managing modules and apps in Raku, and do things like summit to zef etc.",
     "perl" : "6.d",
     "license" : "GPL-3.0-or-later",
     "authors" : [

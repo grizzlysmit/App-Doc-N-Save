@@ -48,7 +48,7 @@ A Raku module for displaying lines in a listing.
 COPYRIGHT
 =========
 
-LGPL V3.0+ [LICENSE](https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE)
+LGPL V3.0+ [LICENSE](https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE)
 
 [Top of Document](#table-of-contents)
 
