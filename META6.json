@@ -18,7 +18,7 @@
         "bugtracker": "https://github.com/grizzlysmit/App-Doc-N-Save/issues"
     },
     "auth": "zef:grizzlysmit",
-    "version" : "0.1.2",
+    "version" : "0.1.3",
     "tags" : [ "generate", "pod6", "MarkDown", "Man", "html" ],
   "test-depends": [
   ]
