@@ -18,8 +18,6 @@ Table of Contents
 
   * [Introduction](#introduction)
 
-  * [list-by(…)](#list-by)
-
     * [doc-n-save](#doc-n-save)
 
     * [mk-raku-dirs](/docs/mk-raku-dirs.md)
