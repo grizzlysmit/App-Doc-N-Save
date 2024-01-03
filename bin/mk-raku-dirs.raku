@@ -51,10 +51,20 @@ A B<Raku> program for generating docs and saving it's changes to git.
 
 =begin code :lang<raku>
 
-multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
+multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
+                     Str:D :d(:$docs) is copy = 'docs', Str:D :T(:$tags) = '',
+                     Str:D :p(:$depends) = '', Str:D :t(:$test) = 't',
+                     Str:D :$test-depends = '', Str :$git-dir is copy = Str,
                      Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) 
+                     Str:D :c(:comment(:$git-comment)) = 'first commit', 
+                     Bool:D :a(:application(:$app)) is copy = False, 
+                     Bool:D :o(:$only-app) is copy = False, 
+                     Str :D(:$description) is copy = Str, 
+                     Str :$git-url is copy = Str,
+                     Str :u(:$git-user) is copy = Str,
+                     Str :e(:$email) is copy = Str,
+                     Str :$zef-auth is copy = Str,
+                     *@additional-files --> Int:D) 
 
 =end code
 

@@ -1,6 +1,10 @@
 #!/usr/bin/env raku
 use v6;
 
+my %*SUB-MAIN-OPTS;
+%*SUB-MAIN-OPTS«named-anywhere» = True;
+#%*SUB-MAIN-OPTS<bundling>       = True;
+
 =begin pod
 
 =head1 Doc-N-Save 
