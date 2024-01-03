@@ -44,7 +44,7 @@ A collection of B<Raku> programs for managing modules and apps in B<Raku>,
 and do things like summit to zef etc. 
 =begin item1
 
-BC<doc-n-save>> a program for generating Documentation from pod files
+L<doc-n-save|#doc-n-save-1> a program for generating Documentation from pod files
 (files containing pod6 markup) and saving the result to git.
 
 =end item1

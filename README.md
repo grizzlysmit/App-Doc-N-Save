@@ -63,7 +63,7 @@ Introduction
 
 A collection of **Raku** programs for managing modules and apps in **Raku**, and do things like summit to zef etc. 
 
-  * B`doc-n-save`> a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.
+  * [doc-n-save](#doc-n-save-1) a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.
 
   * [mk-raku-dirs](/docs/mk-raku-dirs.md) either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
 
