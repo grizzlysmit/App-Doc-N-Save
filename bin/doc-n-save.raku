@@ -56,8 +56,8 @@ from a few simple arguments or make sure that an existing repository is complete
 
 =end item1
 
-=item1 L<release|/docs/release.md>
-=item1 L<release_d|/docs/release_d.md>
+=item1 L<release|/docs/release.md> is a program to send a new release to B<zef> via B<fez>.
+=item1 L<release_d|/docs/release_d.md> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
 
 
 =head3 doc-n-save 

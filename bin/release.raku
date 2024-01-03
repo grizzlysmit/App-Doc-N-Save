@@ -3,7 +3,7 @@ use JSON::Fast;
 
 =begin pod
 
-=head1 release
+=head2 release
 
 A B<Raku> program to fez upload programs or modules to zef and update the
 the git repositories release tags. 

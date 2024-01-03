@@ -67,9 +67,9 @@ A collection of **Raku** programs for managing modules and apps in **Raku**, and
 
   * [mk-raku-dirs](/docs/mk-raku-dirs.md) either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
 
-  * [release](/docs/release.md)
+  * [release](/docs/release.md) is a program to send a new release to **zef** via **fez**.
 
-  * [release_d](/docs/release_d.md)
+  * [release_d](/docs/release_d.md) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
 
 ### doc-n-save 
 
@@ -82,7 +82,7 @@ doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>]
 [Top of Document](#table-of-contents)
 
 Mk-Raku-Dirs 
-=============
+-------------
 
 A **Raku** program for either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
 
@@ -96,7 +96,7 @@ Usage:
 [Top of Document](#table-of-contents)
 
 release
-=======
+-------
 
 A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
 
@@ -111,7 +111,7 @@ Usage:
 [Top of Document](#table-of-contents)
 
 release_d 
-==========
+----------
 
 A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
 

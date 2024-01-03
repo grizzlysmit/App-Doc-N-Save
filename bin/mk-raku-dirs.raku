@@ -8,7 +8,7 @@ my %*SUB-MAIN-OPTS;
 
 =begin pod
 
-=head1 Mk-Raku-Dirs 
+=head2 Mk-Raku-Dirs 
 
 A B<Raku> program for either create a full skeleton repository
 from a few simple arguments or make sure that an existing repository is complete. 
