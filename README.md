@@ -20,11 +20,11 @@ Table of Contents
 
     * [doc-n-save](#doc-n-save-1)
 
-    * [mk-raku-dirs](https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/mk-raku-dirs.md)
+    * [mk-raku-dirs](#mk-raku-dirs)
 
-    * [release](https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release.md)
+    * [release](#release)
 
-    * [release_d](https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release_d.md)
+    * [release_d](#release_d)
 
 NAME
 ====

@@ -23,9 +23,9 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
-=item2 L<mk-raku-dirs|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/mk-raku-dirs.md>
-=item2 L<release|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release.md>
-=item2 L<release_d|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release_d.md>
+=item2 L<mk-raku-dirs|#mk-raku-dirs>
+=item2 L<release|#release>
+=item2 L<release_d|#release_d>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
@@ -204,7 +204,11 @@ multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin)
             'Failed'.say;
             next;
         }
-        "raku --doc=Markdown $pod  > $markdown-path".say;
+        if $separate-markdown-files {
+            "raku --doc=Markdown $pod  > $markdown-path".say;
+        } else {
+            "raku --doc=Markdown $pod  >> $markdown-path".say;
+        }
         my Proc $p3 = run 'raku', '--doc=Markdown', $pod, :out;
         my $markdown-content = $p3.out.slurp: :close;
         if $separate-markdown-files {
