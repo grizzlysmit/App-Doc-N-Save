@@ -66,7 +66,8 @@ from a few simple arguments or make sure that an existing repository is complete
 
 doc-n-save --help
 Usage:
-  doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [-c|--comment=<Str>]
+doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+  
 
 =end code
 
@@ -77,7 +78,7 @@ L<Top of Document|#table-of-contents>
 multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
                      Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Bool:D :o(:$only-app) is copy = False, 
+                     Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
                      Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) {
     $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
     $bin = %*ENV«DOC_N_SAVE_BIN» if $bin eq 'bin' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
@@ -186,7 +187,7 @@ multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin)
         $pod = $pod1;
         $man-path = "$docs/{$additional-pod-file}.1";
         $html-path = "$docs/{$additional-pod-file}.html";
-        $markdown-path = "$docs/{$additional-pod-file}.md";
+        $markdown-path = "$docs/{$additional-pod-file}.md" if $separate-markdown-files;
         "raku --doc=Man $pod  > $man-path".say;
         my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
         my $man-content = $p1.out.slurp: :close;
@@ -206,7 +207,11 @@ multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin)
         "raku --doc=Markdown $pod  > $markdown-path".say;
         my Proc $p3 = run 'raku', '--doc=Markdown', $pod, :out;
         my $markdown-content = $p3.out.slurp: :close;
-        $markdown-path.IO.spurt($markdown-content);
+        if $separate-markdown-files {
+            $markdown-path.IO.spurt($markdown-content);
+        } else {
+            $markdown-path.IO.spurt($markdown-content, :append);
+        }
         if $p3.exitcode != 0 {
             'Failed'.say;
             next;
