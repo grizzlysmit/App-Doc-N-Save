@@ -65,11 +65,11 @@ A collection of **Raku** programs for managing modules and apps in **Raku**, and
 
   * [doc-n-save](#doc-n-save-1) a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.
 
-  * [mk-raku-dirs](/docs/mk-raku-dirs.md) either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
+  * [mk-raku-dirs](#mk-raku-dirs) either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
 
-  * [release](/docs/release.md) is a program to send a new release to **zef** via **fez**.
+  * [release](#release) is a program to send a new release to **zef** via **fez**.
 
-  * [release_d](/docs/release_d.md) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
+  * [release_d](#release_d) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
 
 ### doc-n-save 
 

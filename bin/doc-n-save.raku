@@ -51,13 +51,13 @@ L<doc-n-save|#doc-n-save-1> a program for generating Documentation from pod file
 
 =begin item1
 
-L<mk-raku-dirs|/docs/mk-raku-dirs.md> either create a full skeleton repository
+L<mk-raku-dirs|#mk-raku-dirs> either create a full skeleton repository
 from a few simple arguments or make sure that an existing repository is complete. 
 
 =end item1
 
-=item1 L<release|/docs/release.md> is a program to send a new release to B<zef> via B<fez>.
-=item1 L<release_d|/docs/release_d.md> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
+=item1 L<release|#release> is a program to send a new release to B<zef> via B<fez>.
+=item1 L<release_d|#release_d> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
 
 
 =head3 doc-n-save 
