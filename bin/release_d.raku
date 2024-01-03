@@ -18,7 +18,7 @@ Table of Contents
 =item1 L<SUBTITLE|#subtitle>
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
-=item1 L<release_d|#release_d>
+=item1 L<release_d|#release_d-1>
 
 =NAME release_d 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)

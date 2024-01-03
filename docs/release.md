@@ -18,7 +18,7 @@ Table of Contents
 
   * [Introduction](#introduction)
 
-  * [release_d](#release)
+  * [release](#release-1)
 
 NAME
 ====
