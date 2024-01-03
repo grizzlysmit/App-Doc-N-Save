@@ -43,7 +43,7 @@ release_d
 SUBTITLE
 ========
 
-A Raku module for displaying lines in a listing.
+A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags.
 
 COPYRIGHT
 =========

@@ -24,7 +24,7 @@ Table of Contents
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
 =VERSION 0.1.0
 =TITLE release_d
-=SUBTITLE A Raku module for displaying lines in a listing.
+=SUBTITLE A B<Raku> program to fez upload programs or modules to zef and update the the git repositories release tags.
 
 =COPYRIGHT
 LGPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE>
