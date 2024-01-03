@@ -1,6 +1,6 @@
 {
     "name" : "App::Doc-N-Save",
-    "description" : "A Raku module for displaying lines in a listing.",
+    "description" : "A set of Raku programs for managing Raku modules and apps.",
     "perl" : "6.d",
     "license" : "LGPL-3.0-or-later",
     "authors" : [
@@ -11,14 +11,14 @@
     "provides" : {
         "App::Doc-N-Save" : "bin/doc-n-save.raku"
     },
-    "source-url" : "https://github.com/grizzlysmit/Display-Listings.git",
+    "source-url" : "https://github.com/grizzlysmit/App-Doc-N-Save.git",
     "support" : {
-        "source" : "https://github.com/grizzlysmit/Display-Listings.git",
+        "source" : "https://github.com/grizzlysmit/App-Doc-N-Save.git",
         "email" : "grizzly@smit.id.au",
-        "bugtracker": "https://github.com/grizzlysmit/Display-Listings/issues"
+        "bugtracker": "https://github.com/grizzlysmit/App-Doc-N-Save/issues"
     },
     "auth": "zef:grizzlysmit",
-    "version" : "0.1.9",
+    "version" : "0.1.0",
     "tags" : [ "generate", "pod6", "MarkDown", "Man", "html" ],
   "test-depends": [
   ]

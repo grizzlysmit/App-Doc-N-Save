@@ -40,7 +40,7 @@ L<Top of Document|#table-of-contents>
 
 =head1 Introduction
 
-A B<Raku> module for managing the users GUI Editor preferences in a variety of programs. 
+A B<Raku> program for generating docs and saving it's changes to git. 
 
 =head3 Primary MAIN 
 
