@@ -59,9 +59,11 @@ Introduction
 
 A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
 
-**Note1:** This uses git archive to get around a fez/zef update bug.
+**Note1: you will need a *archive/* directory for this best put it in your *.gitignore* as those archieve files get too big**.
 
-**Note2:** I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit.
+**Note2:** This uses git archive to get around a fez/zef update bug.
+
+**Note3:** I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit.
 
 ### release_d
 

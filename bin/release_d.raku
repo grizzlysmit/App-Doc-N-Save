@@ -37,9 +37,11 @@ L<Top of Document|#table-of-contents>
 A B<Raku> program to fez upload programs or modules to zef and update the
 the git repositories release tags. 
 
-B<Note1:> This uses git archive to get around a fez/zef update bug.
+B<Note1: you will need a I<archive/> directory for this best put it in your I<.gitignore> as those archieve files get too big>.
 
-B<Note2:> I found the original release.raku on the web somewhere in L<raku.land|https://raku.land/>,
+B<Note2:> This uses git archive to get around a fez/zef update bug.
+
+B<Note3:> I found the original release.raku on the web somewhere in L<raku.land|https://raku.land/>,
 if you are the originator please claim it so I can give credit.
 
 =head3 release_d
