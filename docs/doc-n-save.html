@@ -582,7 +582,7 @@ footer {
  <tr class="toc-level-1"><td class="toc-text"><a href="#Name">Name</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#Copyright">Copyright</a></td></tr>
  <tr class="toc-level-1"><td class="toc-text"><a href="#Introduction">Introduction</a></td></tr>
- <tr class="toc-level-3"><td class="toc-text"><a href="#Primary_MAIN_">Primary MAIN </a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save_">doc-n-save </a></td></tr>
 </table></div>
 </nav><div id="Doc-N-Save"></div><div class="subtitle"><p>A collection of Raku programs for displaying lines in a listing.</p></div><div class="pod-body"><section name="___top"><h1 id="Doc-N-Save_"><a href="#___top" class="u" title="go to top of document">Doc-N-Save </a></h1>
 <h2 id="Table_of_Contents"><a href="#___top" class="u" title="go to top of document">Table of Contents</a></h2>
@@ -596,19 +596,10 @@ footer {
 <li><p><a href="#introduction">Introduction</a></p></li>
 <li><p><a href="#list-by">list-by(…)</a></p></li>
 <ul>
-<li><p><a href="#examples">Examples:</a></p></li>
-<ul>
-<li><p><a href="#a-more-complete-example">A more complete example:</a></p></li>
-<li><p><a href="#another-example">Another example:</a></p></li>
-<ul>
-<li><p><a href="#An-Example-of-the-above-code-list-editors-backups-at-work">An Example of the above code <strong><code>list-editors-backups(…)</code></strong> at work:</a></p></li>
-</ul>
-</ul>
-</ul>
-<li><p><a href="#the-default-callbacks">The default callbacks</a></p></li>
-<ul>
-<li><p><a href="#the-hash-of-hashes-stuff">The hash of hashes stuff</a></p></li>
-<li><p><a href="#the-array-of-hashes-stuff">The array of hashes stuff</a></p></li>
+<li><p><a href="#doc-n-save">doc-n-save</a></p></li>
+<li><p><a href="/docs/mk-raku-dirs.md.html">mk-raku-dirs</a></p></li>
+<li><p><a href="/docs/release.md.html">release</a></p></li>
+<li><p><a href="/docs/release_d.md.html">release_d</a></p></li>
 </ul>
 </ul>
 <section>
@@ -617,7 +608,7 @@ footer {
 </section>
 <section>
 <h1 id="Copyright"><a href="#Doc-N-Save" class="u" title="go to top of document">COPYRIGHT</a></h1>
-<p>LGPL V3.0+ <a href="https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE">LICENSE</a></p>
+<p>GPL V3.0+ <a href="https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE">LICENSE</a></p>
 </section>
 <p><a href="#table-of-contents">Top of Document</a></p><h1 id="Introduction"><a href="#Doc-N-Save" class="u" title="go to top of document">Introduction</a></h1>
 <p>A collection of <strong>Raku</strong> programs for managing modules and apps in <strong>Raku</strong>. </p><ul>
@@ -626,14 +617,13 @@ footer {
 <li><p><a href="/docs/release.md.html">release</a></p></li>
 <li><p><a href="/docs/release_d.md.html">release_d</a></p></li>
 </ul>
-<h3 id="Primary_MAIN_"><a href="#Doc-N-Save" class="u" title="go to top of document">Primary MAIN </a></h3>
-<pre class="pod-block-code">multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --&gt; Int:D) 
+<h3 id="doc-n-save_"><a href="#Doc-N-Save" class="u" title="go to top of document">doc-n-save </a></h3>
+<pre class="pod-block-code">doc-n-save --help
+Usage:
+  doc-n-save &lt;name&gt; [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [-c|--comment=&lt;Str&gt;]
 
 </pre><p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
-</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-03T09:46:16Z</span></div></footer>
+</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-03T20:01:56Z</span></div></footer>
 	</body>
 </html>
 

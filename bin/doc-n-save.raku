@@ -23,13 +23,10 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item1 L<list-by(…)|#list-by>
-=item2 L<Examples:|#examples>
-=item3 L<A more complete example:|#a-more-complete-example>
-=item3 L<Another example:|#another-example>
-=item4 L<An Example of the above code B<C<list-editors-backups(…)>> at work:|#An-Example-of-the-above-code-list-editors-backups-at-work>
-=item1 L<The default callbacks|#the-default-callbacks>
-=item2 L<The hash of hashes stuff|#the-hash-of-hashes-stuff>
-=item2 L<The array of hashes stuff|#the-array-of-hashes-stuff>
+=item2 L<doc-n-save|#doc-n-save>
+=item2 L<mk-raku-dirs|/docs/mk-raku-dirs.md>
+=item2 L<release|/docs/release.md>
+=item2 L<release_d|/docs/release_d.md>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
@@ -38,7 +35,7 @@ Table of Contents
 =SUBTITLE A collection of Raku programs for displaying lines in a listing.
 
 =COPYRIGHT
-LGPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE>
+GPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE>
 
 L<Top of Document|#table-of-contents>
 
@@ -63,14 +60,13 @@ from a few simple arguments or make sure that an existing repository is complete
 =item1 L<release_d|/docs/release_d.md>
 
 
-=head3 Primary MAIN 
+=head3 doc-n-save 
 
-=begin code :lang<raku>
+=begin code :lang<bash>
 
-multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) 
+doc-n-save --help
+Usage:
+  doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [-c|--comment=<Str>]
 
 =end code
 
@@ -81,18 +77,15 @@ L<Top of Document|#table-of-contents>
 multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
                      Str:D :m(:$markdown-path) is copy = 'README.md',
+                     Bool:D :o(:$only-app) is copy = False, 
                      Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) {
-    #`««« run raku --doc=Man rakulib/Gzz/Text/Utils.rakumod  > docs/Gzz::Text::Utils.1 \
-            && raku --doc=HTML rakulib/Gzz/Text/Utils.rakumod  > docs/Gzz::Text::Utils.html
-            && raku --doc=Markdown rakulib/Gzz/Text/Utils.rakumod  > README.md  && git pull
-            && git save "commit getting there $(date +'%Y-%m-%dT%H:%M:%S')" && git p-all; git status  »»»
     $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
     $bin = %*ENV«DOC_N_SAVE_BIN» if $bin eq 'bin' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
     $exts = %*ENV«DOC_N_SAVE_EXT» if $exts  eq 'rakumod:raku:rakudoc' && (%*ENV«DOC_N_SAVE_EXT»:exists) && (%*ENV«DOC_N_SAVE_EXT».IO ~~ :d);
     $docs = %*ENV«DOC_N_SAVE_DOCS» if $docs eq 'docs' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
     $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $markdown-path eq 'README.md' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
                                                                                                 && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH».IO ~~ :d);
-    unless $lib.IO ~~ :d {
+    unless $only-app || $lib.IO ~~ :d {
         die "Error: $lib does not exist or is not a directory";
     }
     unless $docs.IO ~~ :d {

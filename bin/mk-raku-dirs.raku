@@ -23,14 +23,7 @@ Table of Contents
 =item1 L<SUBTITLE|#subtitle>
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
-=item1 L<list-by(…)|#list-by>
-=item2 L<Examples:|#examples>
-=item3 L<A more complete example:|#a-more-complete-example>
-=item3 L<Another example:|#another-example>
-=item4 L<An Example of the above code B<C<list-editors-backups(…)>> at work:|#An-Example-of-the-above-code-list-editors-backups-at-work>
-=item1 L<The default callbacks|#the-default-callbacks>
-=item2 L<The hash of hashes stuff|#the-hash-of-hashes-stuff>
-=item2 L<The array of hashes stuff|#the-array-of-hashes-stuff>
+=item1 L<mk-raku-dirs|#mk-raku-dirs>
 
 =NAME Display::Listings 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
@@ -45,26 +38,17 @@ L<Top of Document|#table-of-contents>
 
 =head1 Introduction
 
-A B<Raku> program for generating docs and saving it's changes to git. 
+A B<Raku> program for either create a full skeleton repository
+from a few simple arguments or make sure that an existing repository is complete. 
 
-=head3 Primary MAIN 
+=head3 mk-raku-dirs 
 
-=begin code :lang<raku>
+=begin code :lang<bash>
 
-multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :d(:$docs) is copy = 'docs', Str:D :T(:$tags) = '',
-                     Str:D :p(:$depends) = '', Str:D :t(:$test) = 't',
-                     Str:D :$test-depends = '', Str :$git-dir is copy = Str,
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Str:D :c(:comment(:$git-comment)) = 'first commit', 
-                     Bool:D :a(:application(:$app)) is copy = False, 
-                     Bool:D :o(:$only-app) is copy = False, 
-                     Str :D(:$description) is copy = Str, 
-                     Str :$git-url is copy = Str,
-                     Str :u(:$git-user) is copy = Str,
-                     Str :e(:$email) is copy = Str,
-                     Str :$zef-auth is copy = Str,
-                     *@additional-files --> Int:D) 
+mk-raku-dirs --help
+Usage:
+  mk-raku-dirs empty <name> [<additional-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-d|--docs=<Str>] [-T|--tags=<Str>] [-p|--depends=<Str>] [-t|--test=<Str>] [--test-depends=<Str>] [--git-dir=<Str>] [-m|--markdown-path=<Str>] [-c|--comment|--git-comment=<Str>] [-a|--application|--app] [-o|--only-app] [-D|--description=<Str>] [--git-url=<Str>] [-u|--git-user=<Str>] [-e|--email=<Str>] [-U|--git-username=<Str>] [--zef-auth=<Str>]
+  mk-raku-dirs here <name> [<additional-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-d|--docs=<Str>] [-T|--tags=<Str>] [-p|--depends=<Str>] [-t|--test=<Str>] [--test-depends=<Str>] [--git-dir=<Str>] [-m|--markdown-path=<Str>] [-c|--comment|--git-comment=<Str>] [-a|--application|--app] [-o|--only-app] [-D|--description=<Str>] [-u|--git-user=<Str>] [-e|--email=<Str>] [-U|--git-username=<Str>] [--zef-auth=<Str>]
 
 =end code
 
@@ -84,6 +68,7 @@ multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D 
                      Str :$git-url is copy = Str,
                      Str :u(:$git-user) is copy = Str,
                      Str :e(:$email) is copy = Str,
+                     Str :U(:$git-username) is copy = Str,
                      Str :$zef-auth is copy = Str,
                      *@additional-files --> Int:D) {
     $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
@@ -98,6 +83,13 @@ multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D 
             my Str:D $tmp = qx[git config --global --get user.name];
             $tmp .=chomp;
             $git-user = $tmp if $tmp ne '';
+        }
+    }
+    without $git-username {
+        if %*ENV«GITHUB_USERNAME»:exists {
+            $git-username = %*ENV«GITHUB_USERNAME»;
+        } else {
+            $git-username = "$*USER";
         }
     }
     without $git-user {
@@ -122,11 +114,11 @@ multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D 
         die $msg;
     }
     without $zef-auth {
-        if %*ENV«GIT_ZEF_AUTH»:exists {
-            $zef-auth = %*ENV«GIT_ZEF_AUTH»;
+        if %*ENV«MK_RAKU_DIRS_ZEF_AUTH»:exists {
+            $zef-auth = %*ENV«MK_RAKU_DIRS_ZEF_AUTH»;
         } else {
             my Str:D $msg = qq[you must specifiy zef-auth either set the environment variable ];
-            $msg         ~= qq[GIT_ZEF_AUTH to the value, or pass it using --zef-auth=<Auth>];
+            $msg         ~= qq[MK_RAKU_DIRS_ZEF_AUTH to the value, or pass it using --zef-auth=<Auth>];
             die $msg;
         }
     }
@@ -286,11 +278,11 @@ multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D 
         ],
         depends => @depends,
         provides => %provides,
-        source-url  => "https://github.com/$git-user/$git-dir.git",
+        source-url  => "https://github.com/$git-username/$git-dir.git",
         support => {
-            source => "https://github.com/$git-user/$git-dir.git",
+            source => "https://github.com/$git-username/$git-dir.git",
             email => $email,
-            bugtracker => "https://github.com/$git-user/$git-dir/issues"
+            bugtracker => "https://github.com/$git-username/$git-dir/issues"
         },
         auth => "$zef-auth",
         version => "0.1.0",
@@ -355,6 +347,7 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
                      Str :D(:$description) is copy = Str, 
                      Str :u(:$git-user) is copy = Str,
                      Str :e(:$email) is copy = Str,
+                     Str :U(:$git-username) is copy = Str,
                      Str :$zef-auth is copy = Str,
                      *@additional-files --> Int:D) {
     $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
@@ -377,6 +370,13 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
         $msg         ~= qq[don't forget to change FIRST_NAME and LAST_NAME to you details.\n];
         die $msg;
     }
+    without $git-username {
+        if %*ENV«GITHUB_USERNAME»:exists {
+            $git-username = %*ENV«GITHUB_USERNAME»;
+        } else {
+            $git-username = "$*USER";
+        }
+    }
     without $email {
         if %*ENV«GIT_EMAIL»:exists {
             $email = %*ENV«GIT_EMAIL»;
@@ -393,11 +393,11 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
         die $msg;
     }
     without $zef-auth {
-        if %*ENV«GIT_ZEF_AUTH»:exists {
-            $zef-auth = %*ENV«GIT_ZEF_AUTH»;
+        if %*ENV«MK_RAKU_DIRS_ZEF_AUTH»:exists {
+            $zef-auth = %*ENV«MK_RAKU_DIRS_ZEF_AUTH»;
         } else {
             my Str:D $msg = qq[you must specifiy zef-auth either set the environment variable ];
-            $msg         ~= qq[GIT_ZEF_AUTH to the value, or pass it using --zef-auth=<Auth>];
+            $msg         ~= qq[MK_RAKU_DIRS_ZEF_AUTH to the value, or pass it using --zef-auth=<Auth>];
             die $msg;
         }
     }
@@ -556,11 +556,11 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
         ],
         depends => @depends,
         provides => %provides,
-        source-url  => "https://github.com/$git-user/$git-dir.git",
+        source-url  => "https://github.com/$git-username/$git-dir.git",
         support => {
-            source => "https://github.com/$git-user/$git-dir.git",
+            source => "https://github.com/$git-username/$git-dir.git",
             email => $email,
-            bugtracker => "https://github.com/$git-user/$git-dir/issues"
+            bugtracker => "https://github.com/$git-username/$git-dir/issues"
         },
         auth => "$zef-auth",
         version => "0.1.0",
@@ -599,5 +599,6 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
                      Str :D(:$description) is copy = Str, 
                      Str :u(:$git-user) is copy = Str,
                      Str :e(:$email) is copy = Str,
+                     Str :U(:$git-username) is copy = Str,
                      Str :$zef-auth is copy = Str,
                      *@additional-files --> Int:D) »»»

@@ -20,19 +20,13 @@ Table of Contents
 
   * [list-by(…)](#list-by)
 
-    * [Examples:](#examples)
+    * [doc-n-save](#doc-n-save)
 
-      * [A more complete example:](#a-more-complete-example)
+    * [mk-raku-dirs](/docs/mk-raku-dirs.md)
 
-      * [Another example:](#another-example)
+    * [release](/docs/release.md)
 
-        * [An Example of the above code **`list-editors-backups(…)`** at work:](#An-Example-of-the-above-code-list-editors-backups-at-work)
-
-  * [The default callbacks](#the-default-callbacks)
-
-    * [The hash of hashes stuff](#the-hash-of-hashes-stuff)
-
-    * [The array of hashes stuff](#the-array-of-hashes-stuff)
+    * [release_d](/docs/release_d.md)
 
 NAME
 ====
@@ -62,7 +56,7 @@ A collection of Raku programs for displaying lines in a listing.
 COPYRIGHT
 =========
 
-LGPL V3.0+ [LICENSE](https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE)
+GPL V3.0+ [LICENSE](https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE)
 
 [Top of Document](#table-of-contents)
 
@@ -79,13 +73,12 @@ A collection of **Raku** programs for managing modules and apps in **Raku**.
 
   * [release_d](/docs/release_d.md)
 
-### Primary MAIN 
+### doc-n-save 
 
-```raku
-multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
-                     Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D)
+```bash
+doc-n-save --help
+Usage:
+  doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [-c|--comment=<Str>]
 ```
 
 [Top of Document](#table-of-contents)

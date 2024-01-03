@@ -1,5 +1,5 @@
 .pc
-.TH doc-n-save.raku 1 2024-01-03
+.TH doc-n-save.raku 1 2024-01-04
 .SH Doc\-N\-Save 
 .SS Table of Contents
 .IP \(bu 2m
@@ -20,37 +20,19 @@ Introduction [#introduction]
 list\-by(…) [#list-by]
 .RS 2n
 .IP \(bu 2m
-Examples: [#examples]
-.RE
-.RS 2n
-.RS 2n
-.IP \(bu 2m
-A more complete example: [#a-more-complete-example]
-.RE
-.RE
-.RS 2n
-.RS 2n
-.IP \(bu 2m
-Another example: [#another-example]
-.RE
-.RE
-.RS 2n
-.RS 2n
-.RS 2n
-.IP \(bu 2m
-An Example of the above code \fBlist\-editors\-backups(…)\fR at work: [#An-Example-of-the-above-code-list-editors-backups-at-work]
-.RE
-.RE
-.RE
-.IP \(bu 2m
-The default callbacks [#the-default-callbacks]
-.RS 2n
-.IP \(bu 2m
-The hash of hashes stuff [#the-hash-of-hashes-stuff]
+doc\-n\-save [#doc-n-save]
 .RE
 .RS 2n
 .IP \(bu 2m
-The array of hashes stuff [#the-array-of-hashes-stuff]
+mk\-raku\-dirs [/docs/mk-raku-dirs.md]
+.RE
+.RS 2n
+.IP \(bu 2m
+release [/docs/release.md]
+.RE
+.RS 2n
+.IP \(bu 2m
+release_d [/docs/release_d.md]
 .RE
 .SH "NAME"
 Doc\-N\-Save 
@@ -63,7 +45,7 @@ Doc\-N\-Save
 .SH "SUBTITLE"
 A collection of Raku programs for displaying lines in a listing\&.
 .SH "COPYRIGHT"
-LGPL V3\&.0+ LICENSE [https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE]
+GPL V3\&.0+ LICENSE [https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE]
 
 Top of Document [#table-of-contents]
 .SH Introduction
@@ -77,14 +59,13 @@ mk\-raku\-dirs [/docs/mk-raku-dirs.md] either create a full skeleton repository 
 release [/docs/release.md]
 .IP \(bu 2m
 release_d [/docs/release_d.md]
-.SS Primary MAIN 
+.SS doc\-n\-save 
 
 .RS 4m
 .EX
-multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown\-path) is copy = 'README\&.md',
-                     Str:D :c(:$comment) = 'using doc\-n\-save', *@additional\-pod\-files \-\-> Int:D) 
+doc\-n\-save \-\-help
+Usage:
+  doc\-n\-save <name> [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-c|\-\-comment=<Str>]
 
 
 .EE
