@@ -24,6 +24,7 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item1 L<mk-raku-dirs|#mk-raku-dirs-1>
+=item1 L<main README|/README.md>
 
 =NAME Display::Listings 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)

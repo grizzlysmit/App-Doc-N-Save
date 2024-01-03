@@ -20,6 +20,8 @@ Table of Contents
 
   * [release](#release-1)
 
+  * [main README](/README.md)
+
 NAME
 ====
 

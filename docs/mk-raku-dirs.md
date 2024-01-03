@@ -20,6 +20,8 @@ Table of Contents
 
   * [mk-raku-dirs](#mk-raku-dirs-1)
 
+  * [main README](/README.md)
+
 NAME
 ====
 
