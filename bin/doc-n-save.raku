@@ -31,11 +31,11 @@ Table of Contents
 =item2 L<The hash of hashes stuff|#the-hash-of-hashes-stuff>
 =item2 L<The array of hashes stuff|#the-array-of-hashes-stuff>
 
-=NAME Display::Listings 
+=NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
 =VERSION 0.1.0
-=TITLE Display::Listings
-=SUBTITLE A Raku module for displaying lines in a listing.
+=TITLE Doc-N-Save
+=SUBTITLE A collection of Raku programs for displaying lines in a listing.
 
 =COPYRIGHT
 LGPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE>
@@ -44,7 +44,24 @@ L<Top of Document|#table-of-contents>
 
 =head1 Introduction
 
-A B<Raku> program for generating docs and saving it's changes to git. 
+A collection of B<Raku> programs for managing modules and apps in B<Raku>. 
+=begin item1
+
+BC<doc-n-save>> a program for generating Documentation from pod files
+(files containing pod6 markup) and saving the result to git.
+
+=end item1
+
+=begin item1
+
+L<mk-raku-dirs|/docs/mk-raku-dirs.md> either create a full skeleton repository
+from a few simple arguments or make sure that an existing repository is complete. 
+
+=end item1
+
+=item1 L<release|/docs/release.md>
+=item1 L<release_d|/docs/release_d.md>
+
 
 =head3 Primary MAIN 
 

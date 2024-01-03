@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<title>Display::Listings</title>
+<title>Doc-N-Save</title>
 <meta charset="UTF-8" />
 <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAA/wAAAP8AAACGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAABA
@@ -575,7 +575,7 @@ footer {
 		<rect x="551.153" y="428.32" transform="matrix(0.4226 -0.9063 0.9063 0.4226 -70.9303 749.6747)" stroke="#000000" stroke-width="1.0588" stroke-miterlimit="10" width="3.517" height="4.372"/>
 </g>
 </svg>
-<h1 class="title">Display::Listings</h1></header><div class="pod-content"><nav><div id="TOC"><table>
+<h1 class="title">Doc-N-Save</h1></header><div class="pod-content"><nav><div id="TOC"><table>
 <caption>Table of Contents</caption>
 <tr class="toc-level-1"><td class="toc-text"><a href="#Doc-N-Save_">Doc-N-Save </a></td></tr>
  <tr class="toc-level-2"><td class="toc-text"><a href="#Table_of_Contents">Table of Contents</a></td></tr>
@@ -584,7 +584,7 @@ footer {
  <tr class="toc-level-1"><td class="toc-text"><a href="#Introduction">Introduction</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#Primary_MAIN_">Primary MAIN </a></td></tr>
 </table></div>
-</nav><div id="Display::Listings"></div><div class="subtitle"><p>A Raku module for displaying lines in a listing.</p></div><div class="pod-body"><section name="___top"><h1 id="Doc-N-Save_"><a href="#___top" class="u" title="go to top of document">Doc-N-Save </a></h1>
+</nav><div id="Doc-N-Save"></div><div class="subtitle"><p>A collection of Raku programs for displaying lines in a listing.</p></div><div class="pod-body"><section name="___top"><h1 id="Doc-N-Save_"><a href="#___top" class="u" title="go to top of document">Doc-N-Save </a></h1>
 <h2 id="Table_of_Contents"><a href="#___top" class="u" title="go to top of document">Table of Contents</a></h2>
 <ul>
 <li><p><a href="#name">NAME</a></p></li>
@@ -613,21 +613,27 @@ footer {
 </ul>
 <section>
 <h1 id="Name"><a href="#___top" class="u" title="go to top of document">NAME</a></h1>
-<p>Display::Listings </p>
+<p>Doc-N-Save </p>
 </section>
 <section>
-<h1 id="Copyright"><a href="#Display::Listings" class="u" title="go to top of document">COPYRIGHT</a></h1>
+<h1 id="Copyright"><a href="#Doc-N-Save" class="u" title="go to top of document">COPYRIGHT</a></h1>
 <p>LGPL V3.0+ <a href="https://github.com/grizzlysmit/Display-Listings/blob/main/LICENSE">LICENSE</a></p>
 </section>
-<p><a href="#table-of-contents">Top of Document</a></p><h1 id="Introduction"><a href="#Display::Listings" class="u" title="go to top of document">Introduction</a></h1>
-<p>A <strong>Raku</strong> program for generating docs and saving it's changes to git. </p><h3 id="Primary_MAIN_"><a href="#Display::Listings" class="u" title="go to top of document">Primary MAIN </a></h3>
+<p><a href="#table-of-contents">Top of Document</a></p><h1 id="Introduction"><a href="#Doc-N-Save" class="u" title="go to top of document">Introduction</a></h1>
+<p>A collection of <strong>Raku</strong> programs for managing modules and apps in <strong>Raku</strong>. </p><ul>
+<li><p>B<code>doc-n-save</code>&gt; a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.</p></li>
+<li><p><a href="/docs/mk-raku-dirs.md.html">mk-raku-dirs</a> either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. </p></li>
+<li><p><a href="/docs/release.md.html">release</a></p></li>
+<li><p><a href="/docs/release_d.md.html">release_d</a></p></li>
+</ul>
+<h3 id="Primary_MAIN_"><a href="#Doc-N-Save" class="u" title="go to top of document">Primary MAIN </a></h3>
 <pre class="pod-block-code">multi sub MAIN(Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
                      Str:D :m(:$markdown-path) is copy = 'README.md',
                      Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --&gt; Int:D) 
 
 </pre><p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
-</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-03T09:22:08Z</span></div></footer>
+</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-03T09:46:16Z</span></div></footer>
 	</body>
 </html>
 

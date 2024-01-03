@@ -37,7 +37,7 @@ Table of Contents
 NAME
 ====
 
-Display::Listings 
+Doc-N-Save 
 
 AUTHOR
 ======
@@ -52,12 +52,12 @@ VERSION
 TITLE
 =====
 
-Display::Listings
+Doc-N-Save
 
 SUBTITLE
 ========
 
-A Raku module for displaying lines in a listing.
+A collection of Raku programs for displaying lines in a listing.
 
 COPYRIGHT
 =========
@@ -69,7 +69,15 @@ LGPL V3.0+ [LICENSE](https://github.com/grizzlysmit/Display-Listings/blob/main/L
 Introduction
 ============
 
-A **Raku** program for generating docs and saving it's changes to git. 
+A collection of **Raku** programs for managing modules and apps in **Raku**. 
+
+  * B`doc-n-save`> a program for generating Documentation from pod files (files containing pod6 markup) and saving the result to git.
+
+  * [mk-raku-dirs](/docs/mk-raku-dirs.md) either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
+
+  * [release](/docs/release.md)
+
+  * [release_d](/docs/release_d.md)
 
 ### Primary MAIN 
 
