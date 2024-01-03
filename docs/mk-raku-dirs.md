@@ -18,7 +18,7 @@ Table of Contents
 
   * [Introduction](#introduction)
 
-  * [mk-raku-dirs](#mk-raku-dirs)
+  * [mk-raku-dirs](#mk-raku-dirs-1)
 
 NAME
 ====

@@ -18,7 +18,7 @@ Table of Contents
 
   * [Introduction](#introduction)
 
-  * [release_d](#release_d)
+  * [release_d](#release)
 
 NAME
 ====
@@ -59,7 +59,7 @@ A **Raku** program to fez upload programs or modules to zef and update the the g
 
 **Note: I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit**.
 
-### release_d
+### release
 
 ```bash
 release_d --help

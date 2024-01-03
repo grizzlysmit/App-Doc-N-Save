@@ -18,7 +18,7 @@ Table of Contents
 =item1 L<SUBTITLE|#subtitle>
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
-=item1 L<release_d|#release_d>
+=item1 L<release_d|#release>
 
 =NAME release
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
@@ -39,7 +39,7 @@ the git repositories release tags.
 B<Note: I found the original release.raku on the web somewhere in L<raku.land|https://raku.land/>,
 if you are the originator please claim it so I can give credit>.
 
-=head3 release_d
+=head3 release
 
 =begin code :lang<bash>
 

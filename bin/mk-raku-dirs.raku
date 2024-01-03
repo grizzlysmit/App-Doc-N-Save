@@ -23,7 +23,7 @@ Table of Contents
 =item1 L<SUBTITLE|#subtitle>
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
-=item1 L<mk-raku-dirs|#mk-raku-dirs>
+=item1 L<mk-raku-dirs|#mk-raku-dirs-1>
 
 =NAME Display::Listings 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
