@@ -18,7 +18,7 @@ Table of Contents
 
   * [Introduction](#introduction)
 
-    * [doc-n-save](#doc-n-save)
+    * [doc-n-save](#doc-n-save-1)
 
     * [mk-raku-dirs](/docs/mk-raku-dirs.md)
 

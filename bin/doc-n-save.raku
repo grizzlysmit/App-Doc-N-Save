@@ -22,7 +22,7 @@ Table of Contents
 =item1 L<SUBTITLE|#subtitle>
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
-=item2 L<doc-n-save|#doc-n-save>
+=item2 L<doc-n-save|#doc-n-save-1>
 =item2 L<mk-raku-dirs|/docs/mk-raku-dirs.md>
 =item2 L<release|/docs/release.md>
 =item2 L<release_d|/docs/release_d.md>
