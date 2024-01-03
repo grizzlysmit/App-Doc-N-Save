@@ -23,13 +23,13 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
-=item2 L<mk-raku-dirs|/docs/mk-raku-dirs.md>
-=item2 L<release|/docs/release.md>
-=item2 L<release_d|/docs/release_d.md>
+=item2 L<mk-raku-dirs|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/mk-raku-dirs.md>
+=item2 L<release|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release.md>
+=item2 L<release_d|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/docs/release_d.md>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.0
+=VERSION 0.1.2
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
