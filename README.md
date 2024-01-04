@@ -24,7 +24,7 @@ Table of Contents
 
     * [release](#release)
 
-    * [release_d](#release-d)
+    * [release-d](#release-d)
 
 NAME
 ====
@@ -39,7 +39,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.7
+0.1.8
 
 TITLE
 =====
