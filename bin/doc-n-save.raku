@@ -25,11 +25,11 @@ Table of Contents
 =item2 L<doc-n-save|#doc-n-save-1>
 =item2 L<mk-raku-dirs|#mk-raku-dirs>
 =item2 L<release|#release>
-=item2 L<release_d|#release_d>
+=item2 L<release_d|#release-d>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.5
+=VERSION 0.1.6
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -57,7 +57,7 @@ from a few simple arguments or make sure that an existing repository is complete
 =end item1
 
 =item1 L<release|#release> is a program to send a new release to B<zef> via B<fez>.
-=item1 L<release_d|#release_d> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
+=item1 L<release-d|#release-d> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
 
 
 =head3 doc-n-save 

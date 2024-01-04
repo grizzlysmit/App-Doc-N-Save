@@ -24,7 +24,7 @@ Table of Contents
 
     * [release](#release)
 
-    * [release_d](#release_d)
+    * [release_d](#release-d)
 
 NAME
 ====
@@ -39,7 +39,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.5
+0.1.6
 
 TITLE
 =====
@@ -69,7 +69,7 @@ A collection of **Raku** programs for managing modules and apps in **Raku**, and
 
   * [release](#release) is a program to send a new release to **zef** via **fez**.
 
-  * [release_d](#release_d) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
+  * [release-d](#release-d) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
 
 ### doc-n-save 
 
@@ -110,7 +110,7 @@ Usage:
 
 [Top of Document](#table-of-contents)
 
-release_d 
+release-d 
 ----------
 
 A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
@@ -122,9 +122,9 @@ A **Raku** program to fez upload programs or modules to zef and update the the g
 **Note3:** I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit.
 
 ```bash
-release_d --help
+release-d --help
 Usage:
-  release_d
+  release-d
 ```
 
 [Top of Document](#table-of-contents)
