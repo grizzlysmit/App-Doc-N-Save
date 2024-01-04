@@ -71,6 +71,8 @@ A collection of **Raku** programs for managing modules and apps in **Raku**, and
 
   * [release-d](#release-d) is a program to send a new release to **zef** via **fez** this one solves a bug in **fez**.
 
+### doc-n-save.raku
+
 ### doc-n-save 
 
 ```bash
@@ -80,6 +82,9 @@ doc-n-save <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>]
 ```
 
 [Top of Document](#table-of-contents)
+
+Mk-Raku-Dirs.raku
+-----------------
 
 Mk-Raku-Dirs 
 -------------
@@ -94,6 +99,9 @@ Usage:
 ```
 
 [Top of Document](#table-of-contents)
+
+release.raku
+------------
 
 release
 -------
@@ -110,7 +118,13 @@ Usage:
 
 [Top of Document](#table-of-contents)
 
+release-d.raku 
+---------------
+
 release-d 
+----------
+
+release_d 
 ----------
 
 A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 

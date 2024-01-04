@@ -60,6 +60,7 @@ from a few simple arguments or make sure that an existing repository is complete
 =item1 L<release-d|#release-d> is a program to send a new release to B<zef> via B<fez> this one solves a bug in B<fez>.
 
 
+=head3 doc-n-save.raku
 =head3 doc-n-save 
 
 =begin code :lang<bash>
