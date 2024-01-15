@@ -113,18 +113,14 @@ sub make-n-save-docs(Str:D $name,
             die qq[Error: pod file not found as '$lib/{$pod}.rakumod', '$bin/{$name}.raku', '$lib/{$pod}.rakudoc' nor '$docs/{$name}.rakudoc'];
         }
     } else {
-        dd @exts;
         for @exts -> Str:D $ext {
-            dd $ext;
             given $ext {
                 when 'raku'     { $pod1 = "$bin/{$pod}.$ext";  }
                 when 'rakumod'  { $pod1 = "$lib/{$pod}.$ext";  }
                 when 'rakudoc'  { $pod1 = "$docs/{$pod}.$ext"; }
             }
-            dd $pod1;
             last if $pod1 ne '' && $pod1.IO ~~ :f;
         }
-        dd $pod1, @exts;
         if $pod1 eq '' || $pod1.IO ~~ :!f {
             my Str:D $msg = "Error: pod file not found as any of:\n";
             my Str:D $sep = ',\n';
@@ -274,7 +270,6 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
     without $comment {
         $comment                       = ~%config«comment»;
     }
-    dd @exts;
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
                         $separate-markdown-files, $comment, @additional-pod-files) {
         exit 0;
