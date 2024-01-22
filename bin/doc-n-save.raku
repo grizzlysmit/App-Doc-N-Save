@@ -31,7 +31,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.10
+=VERSION 0.1.11
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
