@@ -1,6 +1,7 @@
 #!/usr/bin/env raku
 use v6;
 use JSON::Fast;
+use Gzz::Text::Utils;
 
 my %*SUB-MAIN-OPTS;
 %*SUB-MAIN-OPTS«named-anywhere» = True;
@@ -30,7 +31,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.8
+=VERSION 0.1.10
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -70,9 +71,28 @@ doc-n-save --help
 Usage:
   doc-n-save [-c|--comment=<Str>]
   doc-n-save create config <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+  doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
   doc-n-save explicit <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
 
 =end code
+
+B<C<doc-n-save>> expects to be run from the root directory of the project.
+
+=item1 Where
+=begin item2
+
+The first form B<C<doc-n-save [-c|--comment=<Str>]>> expects a  B<C<.doc-n-save.json>> file to exist
+in the root directory of the project which is where you run doc-n-save from. 
+
+=end item2
+=item3 comment should be a string to override the comment in the B<C<.doc-n-save.json>> file or leave it out to leave that comment in.
+=item2 the B<C<doc-n-save create config>> creates a B<C<.doc-n-save.json>> file for the first form to use.
+=begin item2
+
+The B<C<doc-n-save explicit>> form takes all the same arguments as the B<C<doc-n-save create config>>
+form but does the create docs and save them to git without saving the args like the other.
+
+=end item2
 
 L<Top of Document|#table-of-contents>
 
@@ -309,6 +329,63 @@ multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakul
                      Str:D :m(:$markdown-path) is copy = 'README.md',
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
                      Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) »»»
+
+multi sub MAIN('prompt', 'create', 'config',
+                     Str $name is copy = Str, 
+                     Str:D :l(:$lib) is copy = 'rakulib',
+                     Str:D :b(:$bin) is copy = 'bin',
+                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc',
+                     Str:D :d(:$docs) is copy = 'docs',
+                     Str:D :m(:$markdown-path) is copy = 'README.md',
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files is copy = False, 
+                     Str:D :c(:$comment) is copy = 'using doc-n-save',
+                     *@additional-pod-files is copy --> Int:D) {
+    my @exts = $exts.split(':');
+    my @candidates;
+    my %name-row = type => 'Str', name => 'name', value => $name;
+    @candidates.push: %name-row;
+    my %lib-row = type => 'Str', name => 'lib', value => $lib;
+    @candidates.push: %lib-row;
+    my %bin-row = type => 'Str', name => 'bin', value => $bin;
+    @candidates.push: %bin-row;
+    my %exts-row = type => 'Array', name => 'exts', value => @exts;
+    @candidates.push: %exts-row;
+    my %docs-row = type => 'Str', name => 'docs', value => $docs;
+    @candidates.push: %docs-row;
+    my %markdown-path-row = type => 'Str', name => 'markdown-path', value => $markdown-path;
+    @candidates.push: %markdown-path-row;
+    my %only-app-row = type => 'Bool', name => 'only-app', value => $only-app;
+    @candidates.push: %only-app-row;
+    my %separate-markdown-files-row = type => 'Bool', name => 'separate-markdown-files', value => $separate-markdown-files;
+    @candidates.push: %separate-markdown-files-row;
+    my %comment-row = type => 'Str', name => 'comment', value => $comment;
+    @candidates.push: %comment-row;
+    my %additional-pod-files-row = type => 'Array', name => 'additional-pod-files', value => @additional-pod-files;
+    @candidates.push: %additional-pod-files-row;
+    my @result = input-menu(@candidates, "Configure Doc-N-Save");
+    if @result {
+        my %config;
+        for @result -> %row {
+            my Str:D $name = %row«name»;
+            %config{$name} = %row«value»;
+        }
+        my Str:D $json = to-json %config, :spacing(4);
+        ".doc-n-save.json".IO.spurt($json);
+        exit 0;
+    }
+    exit 1;
+} #`««« multi sub MAIN('prompt', 'create', 'config',
+                     Str $name is copy = Str, 
+                     Str:D :l(:$lib) is copy = 'rakulib',
+                     Str:D :b(:$bin) is copy = 'bin',
+                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc',
+                     Str:D :d(:$docs) is copy = 'docs',
+                     Str:D :m(:$markdown-path) is copy = 'README.md',
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files is copy = False, 
+                     Str:D :c(:$comment) is copy = 'using doc-n-save',
+                     *@additional-pod-files is copy --> Int:D) »»»
 
 multi sub MAIN('explicit', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',

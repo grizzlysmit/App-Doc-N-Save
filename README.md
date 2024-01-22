@@ -39,7 +39,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.8
+0.1.10
 
 TITLE
 =====
@@ -80,8 +80,21 @@ doc-n-save --help
 Usage:
   doc-n-save [-c|--comment=<Str>]
   doc-n-save create config <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+  doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
   doc-n-save explicit <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
 ```
+
+**`doc-n-save`** expects to be run from the root directory of the project.
+
+  * Where
+
+    * The first form **`doc-n-save [-c|--comment=<Str>]`** expects a **`.doc-n-save.json`** file to exist in the root directory of the project which is where you run doc-n-save from. 
+
+      * comment should be a string to override the comment in the **`.doc-n-save.json`** file or leave it out to leave that comment in.
+
+    * the **`doc-n-save create config`** creates a **`.doc-n-save.json`** file for the first form to use.
+
+    * The **`doc-n-save explicit`** form takes all the same arguments as the **`doc-n-save create config`** form but does the create docs and save them to git without saving the args like the other.
 
 [Top of Document](#table-of-contents)
 

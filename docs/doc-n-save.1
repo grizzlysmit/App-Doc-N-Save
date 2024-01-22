@@ -1,5 +1,5 @@
 .pc
-.TH doc-n-save.raku 1 2024-01-16
+.TH doc-n-save.raku 1 2024-01-22
 .SH Doc\-N\-Save 
 .SS Table of Contents
 .IP \(bu 2m
@@ -37,7 +37,7 @@ Doc\-N\-Save
 .SH "AUTHOR"
 Francis Grizzly Smit (grizzly@smit\&.id\&.au)
 .SH "VERSION"
-0\&.1\&.8
+0\&.1\&.10
 .SH "TITLE"
 Doc\-N\-Save
 .SH "SUBTITLE"
@@ -66,10 +66,33 @@ doc\-n\-save \-\-help
 Usage:
   doc\-n\-save [\-c|\-\-comment=<Str>]
   doc\-n\-save create config <name> [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
+  doc\-n\-save prompt create config [<name>] [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
   doc\-n\-save explicit <name> [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
 
 
 .EE
 .RE
 .P
+\fBdoc\-n\-save\fR expects to be run from the root directory of the project\&.
+.IP \(bu 2m
+Where
+.RS 2n
+.IP \(bu 2m
+The first form \fBdoc\-n\-save [\-c|\-\-comment=<Str>]\fR expects a \fB\&.doc\-n\-save\&.json\fR file to exist in the root directory of the project which is where you run doc\-n\-save from\&. 
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+comment should be a string to override the comment in the \fB\&.doc\-n\-save\&.json\fR file or leave it out to leave that comment in\&.
+.RE
+.RE
+.RS 2n
+.IP \(bu 2m
+the \fBdoc\-n\-save create config\fR creates a \fB\&.doc\-n\-save\&.json\fR file for the first form to use\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+The \fBdoc\-n\-save explicit\fR form takes all the same arguments as the \fBdoc\-n\-save create config\fR form but does the create docs and save them to git without saving the args like the other\&.
+.RE
+
 Top of Document [#table-of-contents]

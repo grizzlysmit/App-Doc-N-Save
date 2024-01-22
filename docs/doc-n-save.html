@@ -24,7 +24,7 @@ Av8AAAD/AAAAAAAAAEAAAAAAAAAAGQAAAP/RAACR/35+/wAAAP8A+wL/AAAA2gAAAGX/AADa/35+
 AAAAZQAAAP8AAAD/AAAAAAAAAAAAAABlAAAA/4WFhQEAAAD/AAAAQAAAAAAAAAD/AAAA2gAAAGUA
 AAAAj/kAAAZgAAADgAAAgAEAAOAHAADgBwAAwAMAAIABAACAAQAAAAEAAAAAAAAAAAAAAAAAAAPA
 AACH4QAAzrMAAA==" rel="icon" type="image/x-icon" /><meta name="author" value="Francis Grizzly Smit (grizzly@smit.id.au)" />
-<meta name="version" value="0.1.8" />
+<meta name="version" value="0.1.10" />
 <style>.comment {
   color: #666; }
 
@@ -623,10 +623,22 @@ footer {
 Usage:
   doc-n-save [-c|--comment=&lt;Str&gt;]
   doc-n-save create config &lt;name&gt; [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
+  doc-n-save prompt create config [&lt;name&gt;] [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
   doc-n-save explicit &lt;name&gt; [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
 
-</pre><p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
-</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-15T23:14:21Z</span></div></footer>
+</pre><p><strong><code>doc-n-save</code></strong> expects to be run from the root directory of the project.</p><ul>
+<li><p>Where</p></li>
+<ul>
+<li><p>The first form <strong><code>doc-n-save [-c|--comment=&lt;Str&gt;]</code></strong> expects a <strong><code>.doc-n-save.json</code></strong> file to exist in the root directory of the project which is where you run doc-n-save from. </p></li>
+<ul>
+<li><p>comment should be a string to override the comment in the <strong><code>.doc-n-save.json</code></strong> file or leave it out to leave that comment in.</p></li>
+</ul>
+<li><p>the <strong><code>doc-n-save create config</code></strong> creates a <strong><code>.doc-n-save.json</code></strong> file for the first form to use.</p></li>
+<li><p>The <strong><code>doc-n-save explicit</code></strong> form takes all the same arguments as the <strong><code>doc-n-save create config</code></strong> form but does the create docs and save them to git without saving the args like the other.</p></li>
+</ul>
+</ul>
+<p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
+</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-22T11:53:32Z</span></div></footer>
 	</body>
 </html>
 
