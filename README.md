@@ -139,7 +139,7 @@ Configure Doc-N-Save
         10	cancel > cancel     
         11	OK > OK             
 use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
-choose a candidate 0..11 =:> B<⌼>
+choose a candidate 0..11 =:> ⌼
 ```
 
 [Top of Document](#table-of-contents)
