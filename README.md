@@ -20,6 +20,18 @@ Table of Contents
 
     * [doc-n-save](#doc-n-save-1)
 
+      * [doc-n-save prompt create config](#doc-n-save-prompt-create-config)
+
+      * [doc-n-save](#doc-n-save-1)
+
+      * [doc-n-save](#doc-n-save-1)
+
+      * [doc-n-save](#doc-n-save-1)
+
+      * [doc-n-save](#doc-n-save-1)
+
+      * [doc-n-save](#doc-n-save-1)
+
     * [mk-raku-dirs](#mk-raku-dirs)
 
     * [release](#release)
@@ -99,6 +111,36 @@ Usage:
       input-menu that allows you to build the correct values a step at a time.
 
     * The **`doc-n-save explicit`** form takes all the same arguments as the **`doc-n-save create config`** form but does the create docs and save them to git without saving the args like the other.
+
+[Top of Document](#table-of-contents)
+
+### doc-n-save prompt create config
+
+Build the **.doc-n-save.json** file interactively using a menu system. 
+
+```sh
+doc-n-save prompt create config --help
+Usage:
+  doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+```
+
+```sh
+Configure Doc-N-Save
+         0	name > doc-n-save   
+         1	lib > rakulib       
+         2	bin > bin           
+         3	exts > rakumod, raku, rakudoc
+         4	docs > docs         
+         5	markdown-path > README.md
+         6	only-app > False    
+         7	separate-markdown-files > False
+         8	comment > using doc-n-save
+         9	additional-pod-files > mk-raku-dirs, release, release-d
+        10	cancel > cancel     
+        11	OK > OK             
+use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
+choose a candidate 0..11 =:> B<⌼>
+```
 
 [Top of Document](#table-of-contents)
 

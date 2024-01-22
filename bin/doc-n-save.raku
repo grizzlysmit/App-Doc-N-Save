@@ -25,6 +25,12 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
+=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save|#doc-n-save-1>
 =item2 L<mk-raku-dirs|#mk-raku-dirs>
 =item2 L<release|#release>
 =item2 L<release-d|#release-d>
@@ -335,6 +341,44 @@ multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakul
                      Str:D :m(:$markdown-path) is copy = 'README.md',
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
                      Str:D :c(:$comment) = 'using doc-n-save', *@additional-pod-files --> Int:D) »»»
+
+=begin pod
+
+=head3 doc-n-save prompt create config
+
+Build the B<.doc-n-save.json> file interactively using a menu system. 
+
+=begin code :lang<sh>
+
+doc-n-save prompt create config --help
+Usage:
+  doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+
+=end code
+
+=begin code :lang<sh>
+
+Configure Doc-N-Save
+         0	name > doc-n-save   
+         1	lib > rakulib       
+         2	bin > bin           
+         3	exts > rakumod, raku, rakudoc
+         4	docs > docs         
+         5	markdown-path > README.md
+         6	only-app > False    
+         7	separate-markdown-files > False
+         8	comment > using doc-n-save
+         9	additional-pod-files > mk-raku-dirs, release, release-d
+        10	cancel > cancel     
+        11	OK > OK             
+use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
+choose a candidate 0..11 =:> B<⌼>
+
+=end code
+
+L<Top of Document|#table-of-contents>
+
+=end pod
 
 multi sub MAIN('prompt', 'create', 'config',
                      Str $name is copy = Str, 

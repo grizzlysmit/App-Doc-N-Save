@@ -1,5 +1,5 @@
 .pc
-.TH doc-n-save.raku 1 2024-01-22
+.TH doc-n-save.raku 1 2024-01-23
 .SH Doc\-N\-Save 
 .SS Table of Contents
 .IP \(bu 2m
@@ -19,6 +19,42 @@ Introduction [#introduction]
 .RS 2n
 .IP \(bu 2m
 doc\-n\-save [#doc-n-save-1]
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save prompt create config [#doc-n-save-prompt-create-config]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
 .RE
 .RS 2n
 .IP \(bu 2m
@@ -106,4 +142,41 @@ input\-menu that allows you to build the correct values a step at a time\&.
 The \fBdoc\-n\-save explicit\fR form takes all the same arguments as the \fBdoc\-n\-save create config\fR form but does the create docs and save them to git without saving the args like the other\&.
 .RE
 
+Top of Document [#table-of-contents]
+.SS doc\-n\-save prompt create config
+
+Build the \fB\&.doc\-n\-save\&.json\fR file interactively using a menu system\&. 
+
+.RS 4m
+.EX
+doc\-n\-save prompt create config \-\-help
+Usage:
+  doc\-n\-save prompt create config [<name>] [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
+
+
+.EE
+.RE
+
+.RS 4m
+.EX
+Configure Doc\-N\-Save
+         0	name > doc\-n\-save   
+         1	lib > rakulib       
+         2	bin > bin           
+         3	exts > rakumod, raku, rakudoc
+         4	docs > docs         
+         5	markdown\-path > README\&.md
+         6	only\-app > False    
+         7	separate\-markdown\-files > False
+         8	comment > using doc\-n\-save
+         9	additional\-pod\-files > mk\-raku\-dirs, release, release\-d
+        10	cancel > cancel     
+        11	OK > OK             
+use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
+choose a candidate 0\&.\&.11 =:> B<⌼>
+
+
+.EE
+.RE
+.P
 Top of Document [#table-of-contents]
