@@ -31,7 +31,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.11
+=VERSION 0.1.12
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -87,6 +87,12 @@ in the root directory of the project which is where you run doc-n-save from.
 =end item2
 =item3 comment should be a string to override the comment in the B<C<.doc-n-save.json>> file or leave it out to leave that comment in.
 =item2 the B<C<doc-n-save create config>> creates a B<C<.doc-n-save.json>> file for the first form to use.
+=begin item2
+
+ B<C<doc-n-save prompt create config>> also creates a config file B<C<.doc-n-save.json>> but gives you a
+input-menu that allows you to build the correct values a step at a time.
+
+=end item2
 =begin item2
 
 The B<C<doc-n-save explicit>> form takes all the same arguments as the B<C<doc-n-save create config>>
