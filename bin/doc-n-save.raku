@@ -26,11 +26,9 @@ Table of Contents
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
 =item3 L<doc-n-save|#doc-n-save-2>
-=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save create config|#doc-n-save-create-config>
 =item3 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
-=item3 L<doc-n-save|#doc-n-save-1>
-=item3 L<doc-n-save|#doc-n-save-1>
-=item3 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save explicit|#doc-n-save-explicit>
 =item2 L<mk-raku-dirs|#mk-raku-dirs>
 =item2 L<release|#release>
 =item2 L<release-d|#release-d>
@@ -307,6 +305,10 @@ L<Top of Document|#table-of-contents>
 =end pod
 
 multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
+    unless ".doc-n-save.json".IO ~~ :f {
+        $*ERR.say: qq[Error: ".doc-n-save.json" doesn't exist, in this directory];
+        exit 1;
+    }
     my $json = ".doc-n-save.json".IO.slurp;
     my %config                         = from-json $json;
     my Str:D  $name                    = %config«name»;

@@ -22,15 +22,11 @@ Table of Contents
 
       * [doc-n-save](#doc-n-save-2)
 
-      * [doc-n-save](#doc-n-save-1)
+      * [doc-n-save create config](#doc-n-save-create-config)
 
       * [doc-n-save prompt create config](#doc-n-save-prompt-create-config)
 
-      * [doc-n-save](#doc-n-save-1)
-
-      * [doc-n-save](#doc-n-save-1)
-
-      * [doc-n-save](#doc-n-save-1)
+      * [doc-n-save explicit](#doc-n-save-explicit)
 
     * [mk-raku-dirs](#mk-raku-dirs)
 
