@@ -47,7 +47,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.12
+0.1.13
 
 TITLE
 =====
@@ -102,9 +102,7 @@ Usage:
 
     * the **`doc-n-save create config`** creates a **`.doc-n-save.json`** file for the first form to use.
 
-    *     B<C<doc-n-save prompt create config>> also creates a config file B<C<.doc-n-save.json>> but gives you a
-
-      input-menu that allows you to build the correct values a step at a time.
+    * **`doc-n-save prompt create config`** also creates a config file **`.doc-n-save.json`** but gives you a input-menu that allows you to build the correct values a step at a time.
 
     * The **`doc-n-save explicit`** form takes all the same arguments as the **`doc-n-save create config`** form but does the create docs and save them to git without saving the args like the other.
 
