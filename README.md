@@ -20,6 +20,8 @@ Table of Contents
 
     * [doc-n-save](#doc-n-save-1)
 
+    * In detail
+
       * [doc-n-save](#doc-n-save-2)
 
       * [doc-n-save create config](#doc-n-save-create-config)
@@ -94,7 +96,7 @@ Usage:
 
 **`doc-n-save`** expects to be run from the root directory of the project.
 
-  * Where
+  * Where (in brief)
 
     * The first form **`doc-n-save [-c|--comment=<Str>]`** expects a **`.doc-n-save.json`** file to exist in the root directory of the project which is where you run doc-n-save from. 
 

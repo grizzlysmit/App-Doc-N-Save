@@ -25,6 +25,7 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
+=item2 In detail
 =item3 L<doc-n-save|#doc-n-save-2>
 =item3 L<doc-n-save create config|#doc-n-save-create-config>
 =item3 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
@@ -82,7 +83,7 @@ Usage:
 
 B<C<doc-n-save>> expects to be run from the root directory of the project.
 
-=item1 Where
+=item1 Where (in brief)
 =begin item2
 
 The first form B<C<doc-n-save [-c|--comment=<Str>]>> expects a  B<C<.doc-n-save.json>> file to exist
