@@ -470,6 +470,8 @@ L<Top of Document|#table-of-contents>
 
 =begin code :lang<sh>
 
+doc-n-save prompt create config doc-n-save mk-raku-dirs release release-d
+
 Configure Doc-N-Save
          0	name > doc-n-save   
          1	lib > rakulib       
