@@ -25,11 +25,11 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
-=item2 In detail
-=item3 L<doc-n-save|#doc-n-save-2>
-=item3 L<doc-n-save create config|#doc-n-save-create-config>
-=item3 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
-=item3 L<doc-n-save explicit|#doc-n-save-explicit>
+=item3 In detail
+=item4 L<doc-n-save|#doc-n-save-2>
+=item4 L<doc-n-save create config|#doc-n-save-create-config>
+=item4 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
+=item4 L<doc-n-save explicit|#doc-n-save-explicit>
 =item2 L<mk-raku-dirs|#mk-raku-dirs>
 =item2 L<release|#release>
 =item2 L<release-d|#release-d>
