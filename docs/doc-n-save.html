@@ -584,7 +584,10 @@ footer {
  <tr class="toc-level-1"><td class="toc-text"><a href="#Introduction">Introduction</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save.raku">doc-n-save.raku</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save_">doc-n-save </a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save">doc-n-save</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save_create_config">doc-n-save create config</a></td></tr>
  <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save_prompt_create_config">doc-n-save prompt create config</a></td></tr>
+ <tr class="toc-level-3"><td class="toc-text"><a href="#doc-n-save_explicit">doc-n-save explicit</a></td></tr>
 </table></div>
 </nav><div id="Doc-N-Save"></div><div class="subtitle"><p>A collection of <strong>Raku</strong> programs for managing modules and apps in <strong>Raku</strong>, and do things like summit to zef etc.</p></div><div class="pod-body"><section name="___top"><h1 id="Doc-N-Save_"><a href="#___top" class="u" title="go to top of document">Doc-N-Save </a></h1>
 <h2 id="Table_of_Contents"><a href="#___top" class="u" title="go to top of document">Table of Contents</a></h2>
@@ -599,9 +602,9 @@ footer {
 <ul>
 <li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
 <ul>
+<li><p><a href="#doc-n-save-2">doc-n-save</a></p></li>
+<li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
 <li><p><a href="#doc-n-save-prompt-create-config">doc-n-save prompt create config</a></p></li>
-<li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
-<li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
 <li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
 <li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
 <li><p><a href="#doc-n-save-1">doc-n-save</a></p></li>
@@ -647,12 +650,70 @@ Usage:
 <li><p>The <strong><code>doc-n-save explicit</code></strong> form takes all the same arguments as the <strong><code>doc-n-save create config</code></strong> form but does the create docs and save them to git without saving the args like the other.</p></li>
 </ul>
 </ul>
+<p><a href="#table-of-contents">Top of Document</a></p></section><section name="pod"><h3 id="doc-n-save"><a href="#Doc-N-Save" class="u" title="go to top of document">doc-n-save</a></h3>
+<p>With no arguments <strong>doc-n-save</strong> looks for a file called <strong>.doc-n-save.json</strong> and uses that to set the parameters to generate the docs and then save them to git i.e. commit and push to main/remote repo.</p><pre class="pod-block-code">doc-n-save  --help
+Usage:
+  doc-n-save [-c|--comment=&lt;Str&gt;]
+
+</pre><p><a href="#table-of-contents">Top of Document</a></p></section><section name="pod"><h3 id="doc-n-save_create_config"><a href="#Doc-N-Save" class="u" title="go to top of document">doc-n-save create config</a></h3>
+<p>Generates the <strong><code>.doc-n-save.json</code></strong> from the supplied arguments and any Environment.</p><pre class="pod-block-code">doc-n-save  --help
+Usage:
+  doc-n-save create config &lt;name&gt; [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
+
+</pre><ul>
+<li><p>Where</p></li>
+<ul>
+<li><p><strong>name</strong> is the name of the primary pod file </p></li>
+<ul>
+<li><p><strong>NB: can be an application file (i.e. ending in <em>.raku</em>), a Module (i.e. ending in <em>.rakumod</em>) or a doc file (i.e. ending in <em>.rakudoc</em>)</strong>.</p></li>
+</ul>
+<li><p><strong>additional-pod-files...</strong> A list of zero or more other pod files.</p></li>
+<li><p><strong>-l|--lib=&lt;Str&gt;</strong> The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.</p></li>
+<li><p><strong>-b|--bin=&lt;Str&gt;</strong> The name of the bin directory, for executables within the library.</p></li>
+<li><p><strong>-e|--exts=&lt;Str&gt;</strong> An array of extensions to look for separated by <strong><code>:</code></strong> by default <strong>rakumod:raku:rakudoc</strong> these are the standard extensions so you probably should leave this alone.</p></li>
+<li><p><strong>-d|--docs=&lt;Str&gt;</strong> The name of the documentation directory. </p></li>
+<li><p><strong>-m|--markdown-path=&lt;Str&gt;</strong> The path to the primary <strong>markdown</strong> file by default <strong>README.md</strong>, generally leave this alone.</p></li>
+<li><p><strong>-o|--only-app</strong> Set to true if this is a executable only package (i.e. no modules).</p></li>
+<li><p><strong>--separate-markdown-files</strong> Set to true if you want each <strong>markdown</strong> file to generate it's own <strong>markdown</strong> file, generally you don't want this, as <strong>raku.land</strong> currently will not carry the docs directory etc.</p></li>
+<li><p><strong>-c|--comment=&lt;Str&gt;</strong> Set to a comment you want to use for the git commit defaults to <strong>using doc-n-save</strong>.</p></li>
+<ul>
+<li><p><strong>do-n-save actually uses a date time and the comment field as the commit comment, (i.e. <em>$comment $datetime</em>)</strong>.</p></li>
+<ul>
+<li><p>Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)</p></li>
+</ul>
+</ul>
+</ul>
+</ul>
 <p><a href="#table-of-contents">Top of Document</a></p></section><section name="pod"><h3 id="doc-n-save_prompt_create_config"><a href="#Doc-N-Save" class="u" title="go to top of document">doc-n-save prompt create config</a></h3>
 <p>Build the <strong>.doc-n-save.json</strong> file interactively using a menu system. </p><pre class="pod-block-code">doc-n-save prompt create config --help
 Usage:
   doc-n-save prompt create config [&lt;name&gt;] [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
 
-</pre><pre class="pod-block-code">Configure Doc-N-Save
+</pre><ul>
+<li><p>Where</p></li>
+<ul>
+<li><p><strong>name</strong> is the name of the primary pod file </p></li>
+<ul>
+<li><p><strong>NB: can be an application file (i.e. ending in <em>.raku</em>), a Module (i.e. ending in <em>.rakumod</em>) or a doc file (i.e. ending in <em>.rakudoc</em>)</strong>.</p></li>
+</ul>
+<li><p><strong>additional-pod-files...</strong> A list of zero or more other pod files.</p></li>
+<li><p><strong>-l|--lib=&lt;Str&gt;</strong> The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.</p></li>
+<li><p><strong>-b|--bin=&lt;Str&gt;</strong> The name of the bin directory, for executables within the library.</p></li>
+<li><p><strong>-e|--exts=&lt;Str&gt;</strong> An array of extensions to look for separated by <strong><code>:</code></strong> by default <strong>rakumod:raku:rakudoc</strong> these are the standard extensions so you probably should leave this alone.</p></li>
+<li><p><strong>-d|--docs=&lt;Str&gt;</strong> The name of the documentation directory. </p></li>
+<li><p><strong>-m|--markdown-path=&lt;Str&gt;</strong> The path to the primary <strong>markdown</strong> file by default <strong>README.md</strong>, generally leave this alone.</p></li>
+<li><p><strong>-o|--only-app</strong> Set to true if this is a executable only package (i.e. no modules).</p></li>
+<li><p><strong>--separate-markdown-files</strong> Set to true if you want each <strong>markdown</strong> file to generate it's own <strong>markdown</strong> file, generally you don't want this, as <strong>raku.land</strong> currently will not carry the docs directory etc.</p></li>
+<li><p><strong>-c|--comment=&lt;Str&gt;</strong> Set to a comment you want to use for the git commit defaults to <strong>using doc-n-save</strong>.</p></li>
+<ul>
+<li><p><strong>do-n-save actually uses a date time and the comment field as the commit comment, (i.e. <em>$comment $datetime</em>)</strong>.</p></li>
+<ul>
+<li><p>Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)</p></li>
+</ul>
+</ul>
+</ul>
+</ul>
+<p><a href="#table-of-contents">Top of Document</a></p><pre class="pod-block-code">Configure Doc-N-Save
          0	name &gt; doc-n-save   
          1	lib &gt; rakulib       
          2	bin &gt; bin           
@@ -668,8 +729,37 @@ Usage:
 use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
 choose a candidate 0..11 =:&gt; ⌼
 
-</pre><p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
-</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-22T18:02:19Z</span></div></footer>
+</pre><p><a href="#table-of-contents">Top of Document</a></p></section><section name="pod"><h3 id="doc-n-save_explicit"><a href="#Doc-N-Save" class="u" title="go to top of document">doc-n-save explicit</a></h3>
+<p>Define the docs etc explicitly and then commit to git etc.</p><pre class="pod-block-code">doc-n-save explicit  --help
+Usage:
+  doc-n-save explicit &lt;name&gt; [&lt;additional-pod-files&gt; ...] [-l|--lib=&lt;Str&gt;] [-b|--bin=&lt;Str&gt;] [-e|--exts=&lt;Str&gt;] [-d|--docs=&lt;Str&gt;] [-m|--markdown-path=&lt;Str&gt;] [-o|--only-app] [--separate-markdown-files] [-c|--comment=&lt;Str&gt;]
+
+</pre><ul>
+<li><p>Where</p></li>
+<ul>
+<li><p><strong>name</strong> is the name of the primary pod file </p></li>
+<ul>
+<li><p><strong>NB: can be an application file (i.e. ending in <em>.raku</em>), a Module (i.e. ending in <em>.rakumod</em>) or a doc file (i.e. ending in <em>.rakudoc</em>)</strong>.</p></li>
+</ul>
+<li><p><strong>additional-pod-files...</strong> A list of zero or more other pod files.</p></li>
+<li><p><strong>-l|--lib=&lt;Str&gt;</strong> The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.</p></li>
+<li><p><strong>-b|--bin=&lt;Str&gt;</strong> The name of the bin directory, for executables within the library.</p></li>
+<li><p><strong>-e|--exts=&lt;Str&gt;</strong> An array of extensions to look for separated by <strong><code>:</code></strong> by default <strong>rakumod:raku:rakudoc</strong> these are the standard extensions so you probably should leave this alone.</p></li>
+<li><p><strong>-d|--docs=&lt;Str&gt;</strong> The name of the documentation directory. </p></li>
+<li><p><strong>-m|--markdown-path=&lt;Str&gt;</strong> The path to the primary <strong>markdown</strong> file by default <strong>README.md</strong>, generally leave this alone.</p></li>
+<li><p><strong>-o|--only-app</strong> Set to true if this is a executable only package (i.e. no modules).</p></li>
+<li><p><strong>--separate-markdown-files</strong> Set to true if you want each <strong>markdown</strong> file to generate it's own <strong>markdown</strong> file, generally you don't want this, as <strong>raku.land</strong> currently will not carry the docs directory etc.</p></li>
+<li><p><strong>-c|--comment=&lt;Str&gt;</strong> Set to a comment you want to use for the git commit defaults to <strong>using doc-n-save</strong>.</p></li>
+<ul>
+<li><p><strong>do-n-save actually uses a date time and the comment field as the commit comment, (i.e. <em>$comment $datetime</em>)</strong>.</p></li>
+<ul>
+<li><p>Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)</p></li>
+</ul>
+</ul>
+</ul>
+</ul>
+<p><a href="#table-of-contents">Top of Document</a></p></section>		</div>
+</div><footer><div>Rendered from <span class="path">UNNAMED</span></div><div>at <span class="time">2024-01-23T00:53:33Z</span></div></footer>
 	</body>
 </html>
 

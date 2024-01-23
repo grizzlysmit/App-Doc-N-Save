@@ -23,19 +23,19 @@ doc\-n\-save [#doc-n-save-1]
 .RS 2n
 .RS 2n
 .IP \(bu 2m
+doc\-n\-save [#doc-n-save-2]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+doc\-n\-save [#doc-n-save-1]
+.RE
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
 doc\-n\-save prompt create config [#doc-n-save-prompt-create-config]
-.RE
-.RE
-.RS 2n
-.RS 2n
-.IP \(bu 2m
-doc\-n\-save [#doc-n-save-1]
-.RE
-.RE
-.RS 2n
-.RS 2n
-.IP \(bu 2m
-doc\-n\-save [#doc-n-save-1]
 .RE
 .RE
 .RS 2n
@@ -143,6 +143,98 @@ The \fBdoc\-n\-save explicit\fR form takes all the same arguments as the \fBdoc\
 .RE
 
 Top of Document [#table-of-contents]
+.SS doc\-n\-save
+
+With no arguments \fBdoc\-n\-save\fR looks for a file called \fB\&.doc\-n\-save\&.json\fR and uses that to set the parameters to generate the docs and then save them to git i\&.e\&. commit and push to main/remote repo\&.
+
+.RS 4m
+.EX
+doc\-n\-save  \-\-help
+Usage:
+  doc\-n\-save [\-c|\-\-comment=<Str>]
+
+
+.EE
+.RE
+.P
+Top of Document [#table-of-contents]
+.SS doc\-n\-save create config
+
+Generates the \fB\&.doc\-n\-save\&.json\fR from the supplied arguments and any Environment\&.
+
+.RS 4m
+.EX
+doc\-n\-save  \-\-help
+Usage:
+  doc\-n\-save create config <name> [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
+
+
+.EE
+.RE
+.IP \(bu 2m
+Where
+.RS 2n
+.IP \(bu 2m
+\fBname\fR is the name of the primary pod file 
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBNB: can be an application file (i\&.e\&. ending in \fI\&.raku\fR), a Module (i\&.e\&. ending in \fI\&.rakumod\fR) or a doc file (i\&.e\&. ending in \fI\&.rakudoc\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.IP \(bu 2m
+\fBadditional\-pod\-files\&.\&.\&.\fR A list of zero or more other pod files\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-l|\-\-lib=<Str>\fR The name of the library directory by default rakulib with a symbolic link of lib to alias it to that\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-b|\-\-bin=<Str>\fR The name of the bin directory, for executables within the library\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-e|\-\-exts=<Str>\fR An array of extensions to look for separated by \fB:\fR by default \fBrakumod:raku:rakudoc\fR these are the standard extensions so you probably should leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-d|\-\-docs=<Str>\fR The name of the documentation directory\&. 
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-m|\-\-markdown\-path=<Str>\fR The path to the primary \fBmarkdown\fR file by default \fBREADME\&.md\fR, generally leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-o|\-\-only\-app\fR Set to true if this is a executable only package (i\&.e\&. no modules)\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-\-separate\-markdown\-files\fR Set to true if you want each \fBmarkdown\fR file to generate it's own \fBmarkdown\fR file, generally you don't want this, as \fBraku\&.land\fR currently will not carry the docs directory etc\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-c|\-\-comment=<Str>\fR Set to a comment you want to use for the git commit defaults to \fBusing doc\-n\-save\fR\&.
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBdo\-n\-save actually uses a date time and the comment field as the commit comment, (i\&.e\&. \fI$comment $datetime\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset\&. (i\&.e\&. 2024\-02\-23T06:10:30\&.2387654+11:00)
+.RE
+.RE
+.RE
+
+Top of Document [#table-of-contents]
 .SS doc\-n\-save prompt create config
 
 Build the \fB\&.doc\-n\-save\&.json\fR file interactively using a menu system\&. 
@@ -156,6 +248,70 @@ Usage:
 
 .EE
 .RE
+.IP \(bu 2m
+Where
+.RS 2n
+.IP \(bu 2m
+\fBname\fR is the name of the primary pod file 
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBNB: can be an application file (i\&.e\&. ending in \fI\&.raku\fR), a Module (i\&.e\&. ending in \fI\&.rakumod\fR) or a doc file (i\&.e\&. ending in \fI\&.rakudoc\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.IP \(bu 2m
+\fBadditional\-pod\-files\&.\&.\&.\fR A list of zero or more other pod files\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-l|\-\-lib=<Str>\fR The name of the library directory by default rakulib with a symbolic link of lib to alias it to that\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-b|\-\-bin=<Str>\fR The name of the bin directory, for executables within the library\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-e|\-\-exts=<Str>\fR An array of extensions to look for separated by \fB:\fR by default \fBrakumod:raku:rakudoc\fR these are the standard extensions so you probably should leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-d|\-\-docs=<Str>\fR The name of the documentation directory\&. 
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-m|\-\-markdown\-path=<Str>\fR The path to the primary \fBmarkdown\fR file by default \fBREADME\&.md\fR, generally leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-o|\-\-only\-app\fR Set to true if this is a executable only package (i\&.e\&. no modules)\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-\-separate\-markdown\-files\fR Set to true if you want each \fBmarkdown\fR file to generate it's own \fBmarkdown\fR file, generally you don't want this, as \fBraku\&.land\fR currently will not carry the docs directory etc\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-c|\-\-comment=<Str>\fR Set to a comment you want to use for the git commit defaults to \fBusing doc\-n\-save\fR\&.
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBdo\-n\-save actually uses a date time and the comment field as the commit comment, (i\&.e\&. \fI$comment $datetime\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset\&. (i\&.e\&. 2024\-02\-23T06:10:30\&.2387654+11:00)
+.RE
+.RE
+.RE
+
+Top of Document [#table-of-contents]
 
 .RS 4m
 .EX
@@ -179,4 +335,81 @@ choose a candidate 0\&.\&.11 =:> ⌼
 .EE
 .RE
 .P
+Top of Document [#table-of-contents]
+.SS doc\-n\-save explicit
+
+Define the docs etc explicitly and then commit to git etc\&.
+
+.RS 4m
+.EX
+doc\-n\-save explicit  \-\-help
+Usage:
+  doc\-n\-save explicit <name> [<additional\-pod\-files> \&.\&.\&.] [\-l|\-\-lib=<Str>] [\-b|\-\-bin=<Str>] [\-e|\-\-exts=<Str>] [\-d|\-\-docs=<Str>] [\-m|\-\-markdown\-path=<Str>] [\-o|\-\-only\-app] [\-\-separate\-markdown\-files] [\-c|\-\-comment=<Str>]
+
+
+.EE
+.RE
+.IP \(bu 2m
+Where
+.RS 2n
+.IP \(bu 2m
+\fBname\fR is the name of the primary pod file 
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBNB: can be an application file (i\&.e\&. ending in \fI\&.raku\fR), a Module (i\&.e\&. ending in \fI\&.rakumod\fR) or a doc file (i\&.e\&. ending in \fI\&.rakudoc\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.IP \(bu 2m
+\fBadditional\-pod\-files\&.\&.\&.\fR A list of zero or more other pod files\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-l|\-\-lib=<Str>\fR The name of the library directory by default rakulib with a symbolic link of lib to alias it to that\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-b|\-\-bin=<Str>\fR The name of the bin directory, for executables within the library\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-e|\-\-exts=<Str>\fR An array of extensions to look for separated by \fB:\fR by default \fBrakumod:raku:rakudoc\fR these are the standard extensions so you probably should leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-d|\-\-docs=<Str>\fR The name of the documentation directory\&. 
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-m|\-\-markdown\-path=<Str>\fR The path to the primary \fBmarkdown\fR file by default \fBREADME\&.md\fR, generally leave this alone\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-o|\-\-only\-app\fR Set to true if this is a executable only package (i\&.e\&. no modules)\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-\-separate\-markdown\-files\fR Set to true if you want each \fBmarkdown\fR file to generate it's own \fBmarkdown\fR file, generally you don't want this, as \fBraku\&.land\fR currently will not carry the docs directory etc\&.
+.RE
+.RS 2n
+.IP \(bu 2m
+\fB\-c|\-\-comment=<Str>\fR Set to a comment you want to use for the git commit defaults to \fBusing doc\-n\-save\fR\&.
+.RE
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+\fBdo\-n\-save actually uses a date time and the comment field as the commit comment, (i\&.e\&. \fI$comment $datetime\fR)\fR\&.
+.RE
+.RE
+.RS 2n
+.RS 2n
+.RS 2n
+.IP \(bu 2m
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset\&. (i\&.e\&. 2024\-02\-23T06:10:30\&.2387654+11:00)
+.RE
+.RE
+.RE
+
 Top of Document [#table-of-contents]

@@ -25,9 +25,9 @@ Table of Contents
 =item1 L<COPYRIGHT|#copyright>
 =item1 L<Introduction|#introduction>
 =item2 L<doc-n-save|#doc-n-save-1>
+=item3 L<doc-n-save|#doc-n-save-2>
+=item3 L<doc-n-save|#doc-n-save-1>
 =item3 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
-=item3 L<doc-n-save|#doc-n-save-1>
-=item3 L<doc-n-save|#doc-n-save-1>
 =item3 L<doc-n-save|#doc-n-save-1>
 =item3 L<doc-n-save|#doc-n-save-1>
 =item3 L<doc-n-save|#doc-n-save-1>
@@ -287,6 +287,25 @@ sub make-n-save-docs(Str:D $name,
                      Str:D $comment,
                      @additional-pod-files --> Bool:D) »»»
 
+=begin pod
+
+=head3 doc-n-save
+
+With no arguments B<doc-n-save> looks for a file called B<.doc-n-save.json> and uses that to set
+the parameters to generate the docs and then save them to git i.e. commit and push to main/remote repo.
+
+=begin code :lang<bash>
+
+doc-n-save  --help
+Usage:
+  doc-n-save [-c|--comment=<Str>]
+
+=end code
+
+L<Top of Document|#table-of-contents>
+
+=end pod
+
 multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
     my $json = ".doc-n-save.json".IO.slurp;
     my %config                         = from-json $json;
@@ -309,6 +328,58 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
         exit 1;
     }
 } #`««« multi sub MAIN(--> Int:D) »»»
+
+=begin pod
+
+=head3 doc-n-save create config
+
+Generates the B<C<.doc-n-save.json>> from the supplied arguments and any Environment.
+
+=begin code :lang<raku>
+
+doc-n-save  --help
+Usage:
+  doc-n-save create config <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+
+=end code
+
+=item1 Where
+=item2 B<name> is the name of the primary pod file 
+=begin item3
+
+B<NB: can be an application file (i.e. ending in I<.raku>), a Module (i.e. ending in I<.rakumod>) or a doc file (i.e. ending in I<.rakudoc>)>.
+
+=end item3 
+=item2 B<additional-pod-files...>      A list of zero or more other pod files.
+=item2 B«-l|--lib=<Str>»               The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+=item2 B«-b|--bin=<Str>»               The name of the bin directory, for executables within the library.
+=begin item2
+
+B«-e|--exts=<Str>»                     An array of extensions to look for separated by B<C<:>> by default
+B<rakumod:raku:rakudoc> these are the standard extensions so you probably should leave this alone.
+
+=end item2
+=item2 B«-d|--docs=<Str>»              The name of the documentation directory. 
+=item2 B«-m|--markdown-path=<Str>»     The path to the primary B<markdown> file by default B<README.md>, generally leave this alone.
+=item2 B«-o|--only-app»                Set to true if this is a executable only package (i.e. no modules).
+=begin item2
+
+B«--separate-markdown-files»           Set to true if you want each B<markdown> file to generate it's own B<markdown> file,
+generally you don't want this, as B<raku.land> currently will not carry the docs directory etc.
+
+=end item2
+=item2 B«-c|--comment=<Str>»           Set to a comment you want to use for the git commit defaults to B<using doc-n-save>.
+=item3 B«do-n-save actually uses a date time and the comment field as the commit comment, (i.e. I<$comment $datetime>)».
+=begin item4
+
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation,
+including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
+
+=end item4
+
+L<Top of Document|#table-of-contents>
+
+=end pod
 
 multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
@@ -355,6 +426,42 @@ Usage:
   doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
 
 =end code
+
+=item1 Where
+=item2 B<name> is the name of the primary pod file 
+=begin item3
+
+B<NB: can be an application file (i.e. ending in I<.raku>), a Module (i.e. ending in I<.rakumod>) or a doc file (i.e. ending in I<.rakudoc>)>.
+
+=end item3 
+=item2 B<additional-pod-files...>      A list of zero or more other pod files.
+=item2 B«-l|--lib=<Str>»               The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+=item2 B«-b|--bin=<Str>»               The name of the bin directory, for executables within the library.
+=begin item2
+
+B«-e|--exts=<Str>»                     An array of extensions to look for separated by B<C<:>> by default
+B<rakumod:raku:rakudoc> these are the standard extensions so you probably should leave this alone.
+
+=end item2
+=item2 B«-d|--docs=<Str>»              The name of the documentation directory. 
+=item2 B«-m|--markdown-path=<Str>»     The path to the primary B<markdown> file by default B<README.md>, generally leave this alone.
+=item2 B«-o|--only-app»                Set to true if this is a executable only package (i.e. no modules).
+=begin item2
+
+B«--separate-markdown-files»           Set to true if you want each B<markdown> file to generate it's own B<markdown> file,
+generally you don't want this, as B<raku.land> currently will not carry the docs directory etc.
+
+=end item2
+=item2 B«-c|--comment=<Str>»           Set to a comment you want to use for the git commit defaults to B<using doc-n-save>.
+=item3 B«do-n-save actually uses a date time and the comment field as the commit comment, (i.e. I<$comment $datetime>)».
+=begin item4
+
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation,
+including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
+
+=end item4
+
+L<Top of Document|#table-of-contents>
 
 =begin code :lang<sh>
 
@@ -436,6 +543,58 @@ multi sub MAIN('prompt', 'create', 'config',
                      Bool:D :$separate-markdown-files is copy = False, 
                      Str:D :c(:$comment) is copy = 'using doc-n-save',
                      *@additional-pod-files is copy --> Int:D) »»»
+
+=begin pod
+
+=head3 doc-n-save explicit
+
+Define the docs etc explicitly and then commit to git etc.
+
+=begin code :lang<bash>
+
+doc-n-save explicit  --help
+Usage:
+  doc-n-save explicit <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+
+=end code
+
+=item1 Where
+=item2 B<name> is the name of the primary pod file 
+=begin item3
+
+B<NB: can be an application file (i.e. ending in I<.raku>), a Module (i.e. ending in I<.rakumod>) or a doc file (i.e. ending in I<.rakudoc>)>.
+
+=end item3 
+=item2 B<additional-pod-files...>      A list of zero or more other pod files.
+=item2 B«-l|--lib=<Str>»               The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+=item2 B«-b|--bin=<Str>»               The name of the bin directory, for executables within the library.
+=begin item2
+
+B«-e|--exts=<Str>»                     An array of extensions to look for separated by B<C<:>> by default
+B<rakumod:raku:rakudoc> these are the standard extensions so you probably should leave this alone.
+
+=end item2
+=item2 B«-d|--docs=<Str>»              The name of the documentation directory. 
+=item2 B«-m|--markdown-path=<Str>»     The path to the primary B<markdown> file by default B<README.md>, generally leave this alone.
+=item2 B«-o|--only-app»                Set to true if this is a executable only package (i.e. no modules).
+=begin item2
+
+B«--separate-markdown-files»           Set to true if you want each B<markdown> file to generate it's own B<markdown> file,
+generally you don't want this, as B<raku.land> currently will not carry the docs directory etc.
+
+=end item2
+=item2 B«-c|--comment=<Str>»           Set to a comment you want to use for the git commit defaults to B<using doc-n-save>.
+=item3 B«do-n-save actually uses a date time and the comment field as the commit comment, (i.e. I<$comment $datetime>)».
+=begin item4
+
+Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation,
+including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
+
+=end item4
+
+L<Top of Document|#table-of-contents>
+
+=end pod
 
 multi sub MAIN('explicit', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
                      Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',

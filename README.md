@@ -20,11 +20,11 @@ Table of Contents
 
     * [doc-n-save](#doc-n-save-1)
 
+      * [doc-n-save](#doc-n-save-2)
+
+      * [doc-n-save](#doc-n-save-1)
+
       * [doc-n-save prompt create config](#doc-n-save-prompt-create-config)
-
-      * [doc-n-save](#doc-n-save-1)
-
-      * [doc-n-save](#doc-n-save-1)
 
       * [doc-n-save](#doc-n-save-1)
 
@@ -114,6 +114,58 @@ Usage:
 
 [Top of Document](#table-of-contents)
 
+### doc-n-save
+
+With no arguments **doc-n-save** looks for a file called **.doc-n-save.json** and uses that to set the parameters to generate the docs and then save them to git i.e. commit and push to main/remote repo.
+
+```bash
+doc-n-save  --help
+Usage:
+  doc-n-save [-c|--comment=<Str>]
+```
+
+[Top of Document](#table-of-contents)
+
+### doc-n-save create config
+
+Generates the **`.doc-n-save.json`** from the supplied arguments and any Environment.
+
+```raku
+doc-n-save  --help
+Usage:
+  doc-n-save create config <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+```
+
+  * Where
+
+    * **name** is the name of the primary pod file 
+
+      * **NB: can be an application file (i.e. ending in *.raku*), a Module (i.e. ending in *.rakumod*) or a doc file (i.e. ending in *.rakudoc*)**.
+
+    * **additional-pod-files...** A list of zero or more other pod files.
+
+    * **-l|--lib=<Str>** The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+
+    * **-b|--bin=<Str>** The name of the bin directory, for executables within the library.
+
+    * **-e|--exts=<Str>** An array of extensions to look for separated by **`:`** by default **rakumod:raku:rakudoc** these are the standard extensions so you probably should leave this alone.
+
+    * **-d|--docs=<Str>** The name of the documentation directory. 
+
+    * **-m|--markdown-path=<Str>** The path to the primary **markdown** file by default **README.md**, generally leave this alone.
+
+    * **-o|--only-app** Set to true if this is a executable only package (i.e. no modules).
+
+    * **--separate-markdown-files** Set to true if you want each **markdown** file to generate it's own **markdown** file, generally you don't want this, as **raku.land** currently will not carry the docs directory etc.
+
+    * **-c|--comment=<Str>** Set to a comment you want to use for the git commit defaults to **using doc-n-save**.
+
+      * **do-n-save actually uses a date time and the comment field as the commit comment, (i.e. *$comment $datetime*)**.
+
+        * Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
+
+[Top of Document](#table-of-contents)
+
 ### doc-n-save prompt create config
 
 Build the **.doc-n-save.json** file interactively using a menu system. 
@@ -123,6 +175,36 @@ doc-n-save prompt create config --help
 Usage:
   doc-n-save prompt create config [<name>] [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
 ```
+
+  * Where
+
+    * **name** is the name of the primary pod file 
+
+      * **NB: can be an application file (i.e. ending in *.raku*), a Module (i.e. ending in *.rakumod*) or a doc file (i.e. ending in *.rakudoc*)**.
+
+    * **additional-pod-files...** A list of zero or more other pod files.
+
+    * **-l|--lib=<Str>** The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+
+    * **-b|--bin=<Str>** The name of the bin directory, for executables within the library.
+
+    * **-e|--exts=<Str>** An array of extensions to look for separated by **`:`** by default **rakumod:raku:rakudoc** these are the standard extensions so you probably should leave this alone.
+
+    * **-d|--docs=<Str>** The name of the documentation directory. 
+
+    * **-m|--markdown-path=<Str>** The path to the primary **markdown** file by default **README.md**, generally leave this alone.
+
+    * **-o|--only-app** Set to true if this is a executable only package (i.e. no modules).
+
+    * **--separate-markdown-files** Set to true if you want each **markdown** file to generate it's own **markdown** file, generally you don't want this, as **raku.land** currently will not carry the docs directory etc.
+
+    * **-c|--comment=<Str>** Set to a comment you want to use for the git commit defaults to **using doc-n-save**.
+
+      * **do-n-save actually uses a date time and the comment field as the commit comment, (i.e. *$comment $datetime*)**.
+
+        * Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
+
+[Top of Document](#table-of-contents)
 
 ```sh
 Configure Doc-N-Save
@@ -141,6 +223,46 @@ Configure Doc-N-Save
 use cancel, bye, bye bye, quit, q, or 11 to quit or enter to accept the values as is
 choose a candidate 0..11 =:> ⌼
 ```
+
+[Top of Document](#table-of-contents)
+
+### doc-n-save explicit
+
+Define the docs etc explicitly and then commit to git etc.
+
+```bash
+doc-n-save explicit  --help
+Usage:
+  doc-n-save explicit <name> [<additional-pod-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-e|--exts=<Str>] [-d|--docs=<Str>] [-m|--markdown-path=<Str>] [-o|--only-app] [--separate-markdown-files] [-c|--comment=<Str>]
+```
+
+  * Where
+
+    * **name** is the name of the primary pod file 
+
+      * **NB: can be an application file (i.e. ending in *.raku*), a Module (i.e. ending in *.rakumod*) or a doc file (i.e. ending in *.rakudoc*)**.
+
+    * **additional-pod-files...** A list of zero or more other pod files.
+
+    * **-l|--lib=<Str>** The name of the library directory by default rakulib with a symbolic link of lib to alias it to that.
+
+    * **-b|--bin=<Str>** The name of the bin directory, for executables within the library.
+
+    * **-e|--exts=<Str>** An array of extensions to look for separated by **`:`** by default **rakumod:raku:rakudoc** these are the standard extensions so you probably should leave this alone.
+
+    * **-d|--docs=<Str>** The name of the documentation directory. 
+
+    * **-m|--markdown-path=<Str>** The path to the primary **markdown** file by default **README.md**, generally leave this alone.
+
+    * **-o|--only-app** Set to true if this is a executable only package (i.e. no modules).
+
+    * **--separate-markdown-files** Set to true if you want each **markdown** file to generate it's own **markdown** file, generally you don't want this, as **raku.land** currently will not carry the docs directory etc.
+
+    * **-c|--comment=<Str>** Set to a comment you want to use for the git commit defaults to **using doc-n-save**.
+
+      * **do-n-save actually uses a date time and the comment field as the commit comment, (i.e. *$comment $datetime*)**.
+
+        * Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
 
 [Top of Document](#table-of-contents)
 
