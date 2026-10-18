@@ -131,7 +131,13 @@ sub make-n-save-docs(Str:D $name,
         die "Error: {$markdown-path.IO.dirname} does not exist or is not a directory";
     }
     my Str:D $pod = $name;
+    if $pod.starts-with('App::') {
+        unless "$bin/App".IO ~~ :d {
+            $pod ~~ s/^ 'App::' //;
+        }
+    }
     $pod ~~ s:g!'::'!/!;
+    #dd $pod, @exts;
     my Str:D $pod1 = '';
     if !@exts {
         if $lib.IO ~~ :d && "$lib/{$pod}.rakumod".IO ~~ :f {
@@ -148,9 +154,18 @@ sub make-n-save-docs(Str:D $name,
     } else {
         for @exts -> Str:D $ext {
             given $ext {
-                when 'raku'     { $pod1 = "$bin/{$pod}.$ext";  }
-                when 'rakumod'  { $pod1 = "$lib/{$pod}.$ext";  }
-                when 'rakudoc'  { $pod1 = "$docs/{$pod}.$ext"; }
+                when 'raku'     {
+                    $pod1 = "$bin/{$pod}.$ext"; 
+                    $pod1 = "$bin/{$pod.lc}.$ext" if $pod1.IO ~~ :!f;
+                }
+                when 'rakumod'  {
+                    $pod1 = "$lib/{$pod}.$ext";
+                    $pod1 = "$lib/{$pod.lc}.$ext" if $pod1.IO ~~ :!f;
+                }
+                when 'rakudoc'  {
+                    $pod1 = "$docs/{$pod}.$ext";
+                    $pod1 = "$docs/{$pod.lc}.$ext" if $pod1.IO ~~ :!f;
+                }
             }
             last if $pod1 ne '' && $pod1.IO ~~ :f;
         }
@@ -229,7 +244,10 @@ sub make-n-save-docs(Str:D $name,
         $pod = $pod1;
         $man-path = "$docs/{$additional-pod-file}.1";
         $html-path = "$docs/{$additional-pod-file}.html";
-        $markdown-path = "$docs/{$additional-pod-file}.md" if $separate-markdown-files;
+        if $separate-markdown-files {
+            $markdown-path = "$docs/{$additional-pod-file}/README.md";
+            "$docs/{$additional-pod-file}".IO.mkdir;
+        }
         "raku --doc=Man $pod  > $man-path".say;
         my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
         my $man-content = $p1.out.slurp: :close;

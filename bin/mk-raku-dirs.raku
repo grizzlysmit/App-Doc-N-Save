@@ -372,7 +372,8 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
             die $msg;
         }
     }
-    my Bool:D $module = $name ~~ rx/ '.rakumod' $ / || (@additional-files.grep( { rx/ '.rakumod' $ / }).elems > 0);
+    my Match:D $m = $name ~~ rx/ '.rakumod' $ /;
+    my Bool:D $module = ($m ?? True !! False) || (@additional-files.grep( { rx/ '.rakumod' $ / }).elems > 0);
     $only-app = !$module;
     $app = True if $only-app;
     $app = True if $name.IO.basename.starts-with('App::', :ignorecase);
@@ -442,7 +443,7 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
         $_name ~~ s/ '.rakumod' $ //;
         my Str:D $pod_d = $pod;
         $pod_d ~~ s/ '.raku' \w* $ //;
-        "$lib/$pod_d".IO.dirname.mkdir;
+        "$lib/$pod_d".IO.dirname.IO.mkdir;
         "$lib/$pod".IO.spurt(qq[unit module {$_name}:ver<0.1.0>:auth<$git-user ($email)>;\n\n], :createonly) unless "$lib/$pod".IO ~~ :f;
         %provides{$_name} = "$lib/$pod";
     } elsif $name ~~ rx/ '.rakudoc' $ / {
@@ -463,7 +464,7 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
         my Str:D $msg = qq[Error: unknown extension {$pod.IO.ext} I cannot cope.];
         die $msg;
     }
-    $markdown-path.IO.spurt(qq[$_name\n{'=' x $_name.chars}\n\n], :createonly) unless "$docs/$pod".IO ~~ :f;
+    $markdown-path.IO.spurt(qq[$_name\n{'=' x $_name.chars}\n\n]) unless "$docs/$pod".IO ~~ :f;
     for @additional-files -> $additional-file {
         $pod = $additional-file.IO.basename;
         if $additional-file ~~ rx/ '.raku' $ / {
@@ -491,7 +492,7 @@ multi sub MAIN('here', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :
             $additional-filename ~~ s/ '.rakudoc' $ //;
             "$docs/$pod".IO.spurt(qq[=begin pod\n\n=head1 $additional-filename\n\n=end pod], :createonly) unless "$docs/$pod".IO ~~ :f;
         } else {
-            my Str:D $msg = qq[Error: unknown extension \`{$pod.IO.ext}' I cannot cope skipping file: {$additional-file}.];
+            my Str:D $msg = qq[Error: unknown extension \`{$pod.IO.extension}' I cannot cope skipping file: {$additional-file}.];
             warn $msg;
         }
     } # for @additional-pod-files -> $additional-pod-file #

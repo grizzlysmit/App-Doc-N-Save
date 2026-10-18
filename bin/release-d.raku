@@ -30,9 +30,9 @@ L<Top of Document|#table-of-contents>
 =end pod
 
 sub MAIN() {
-    given from-json(slurp('META6.json')) -> (:$version!, *%) {
+    given from-json(slurp('META6.json')) -> (:$version!, :$name!, *%) {
         my Str:D $datetime = DateTime.now.Str;
-        my Str:D $filename = "archive/{$datetime}-Gzz-Text-Utils-{$version}.tar.gz";
+        my Str:D $filename = "archive/{$datetime}-{$name}-{$version}.tar.gz";
         my Str:D $archive  = "git archive --format=tar.gz --output=$filename HEAD";
         $archive.say;
         shell($archive);
