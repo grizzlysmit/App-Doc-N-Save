@@ -256,7 +256,7 @@ multi sub MAIN('empty', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D 
             bugtracker => "https://github.com/$git-username/$git-dir/issues"
         },
         auth => "$zef-auth",
-        version => "0.1.0",
+        version => "0.1.15",
         "tags" => @tags,
       test-depends => @test-depends
     };
