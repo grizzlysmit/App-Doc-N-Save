@@ -187,9 +187,9 @@ sub make-n-save-docs(Str:D $name,
             die $msg;
         }
     } 
+    my Str:D $man-path = "$docs/{$pod}.1";
+    my Str:D $html-path = "$docs/{$pod}.html";
     $pod = $pod1;
-    my Str:D $man-path = "$docs/{$name}.1";
-    my Str:D $html-path = "$docs/{$name}.html";
     "raku --doc=Man $pod  > $man-path".say;
     my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
     my $man-content = $p1.out.slurp: :close;
