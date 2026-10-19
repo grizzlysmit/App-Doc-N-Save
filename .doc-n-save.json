@@ -1,7 +1,7 @@
 {
     "separate-markdown-files": false,
     "bin": "bin",
-    "docs": "docs",
+    "docs": "doc",
     "lib": "rakulib",
     "name": "doc-n-save",
     "exts": [
