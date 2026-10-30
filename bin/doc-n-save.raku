@@ -427,17 +427,34 @@ L<Top of Document|#table-of-contents>
 
 =end pod
 
-multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
+                     Str :e(:$exts) is copy = Str, Str :d(:$docs) is copy = Str,
+                     Str :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
-                     Str:D :c(:$comment) = 'using doc-n-save', Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) {
-    $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
-    $bin = %*ENV«DOC_N_SAVE_BIN» if $bin eq 'bin' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
-    $exts = %*ENV«DOC_N_SAVE_EXT» if $exts  eq 'rakumod:raku:rakudoc' && (%*ENV«DOC_N_SAVE_EXT»:exists) && (%*ENV«DOC_N_SAVE_EXT».IO ~~ :d);
-    $docs = %*ENV«DOC_N_SAVE_DOCS» if $docs eq 'docs' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
-    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $markdown-path eq 'README.md' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
+                     Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) is copy = Str, *@additional-pod-files is copy --> Int:D) {
+    my Str:D $tmp = $lib // '';
+    $lib   = %*ENV«DOC_N_SAVE_LIB» if $tmp eq '' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
+    $lib //= 'rakulib';
+    $tmp = $bin // '';
+    $bin   = %*ENV«DOC_N_SAVE_BIN» if $tmp eq '' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
+    $bin //= 'bin';
+    $tmp = $exts // '';
+    $exts = %*ENV«DOC_N_SAVE_EXT» if $exts  eq '' && (%*ENV«DOC_N_SAVE_EXT»:exists) && (%*ENV«DOC_N_SAVE_EXT».IO ~~ :d);
+    $exts //= 'rakumod:raku:rakudoc';
+    $tmp = $docs // '';
+    $docs = %*ENV«DOC_N_SAVE_DOCS» if $tmp eq '' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
+    $docs //= 'docs';
+    $tmp = $markdown-path // '';
+    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
                                                                                                 && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH».IO ~~ :d);
+    $markdown-path //= 'README.md';
+    $tmp = $markdown-path-alt // '';
+    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT».IO ~~ :d);
+    my @tmp = |@additional-pod-files;
+    @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
+                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
+    my @exts = $exts.split(':');
     unless $only-app || $lib.IO ~~ :d {
         die "Error: $lib does not exist or is not a directory";
     }
@@ -447,18 +464,17 @@ multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakul
     unless $markdown-path.IO.dirname.IO ~~ :d {
         die "Error: {$markdown-path.IO.dirname} does not exist or is not a directory";
     }
-    my @exts = $exts.split(':');
     my %config = name => $name, lib => $lib, bin => $bin, exts => @exts, docs => $docs, markdown-path => $markdown-path, 
                  separate-markdown-files => $separate-markdown-files, 
                  only-app => $only-app, comment => $comment, additional-pod-files => @additional-pod-files;
     %config«markdown-path-alt» = $markdown-path-alt;
     my Str:D $json = to-json %config, :spacing(4);
     ".doc-n-save.json".IO.spurt($json);
-} #`««« multi sub MAIN('create', 'config', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+} #`««« multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
+                     Str :e(:$exts) is copy = Str, Str :d(:$docs) is copy = Str,
+                     Str :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
-                     Str:D :c(:$comment) = 'using doc-n-save', Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) »»»
+                     Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) is copy = Str, *@additional-pod-files is copy --> Int:D) »»»
 
 =begin pod
 
@@ -537,30 +553,48 @@ L<Top of Document|#table-of-contents>
 =end pod
 
 multi sub MAIN('prompt', 'create', 'config',
-                     Str $name is copy = Str, 
-                     Str:D :l(:$lib) is copy = 'rakulib',
-                     Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc',
-                     Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+                     Str    $name is copy = Str, 
+                     Str    :l(:$lib) is copy = Str,
+                     Str    :b(:$bin) is copy = Str,
+                     Str    :e(:$exts) = Str,
+                     Str    :d(:$docs) is copy = Str,
+                     Str    :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False,
                      Bool:D :$separate-markdown-files is copy = False, 
-                     Str:D :c(:$comment) is copy = 'using doc-n-save', 
-                     Str   :a(:$markdown-path-alt) = Str,
+                     Str    :c(:$comment) is copy = Str, 
+                     Str    :a(:$markdown-path-alt) = Str,
                      *@additional-pod-files is copy --> Int:D) {
     my @exts = $exts.split(':');
+    if ".doc-n-save.json".IO ~~ :f {
+        my $json                           = ".doc-n-save.json".IO.slurp;
+        my %config                         = from-json $json;
+        $name                    = $name // %config«name»;
+        $lib                     = $lib // %config«lib»;
+        $bin                     = $bin // %config«bin»;
+        @exts                    = @exts ?? |@exts !! |%config«exts»;
+        $docs                    = $docs // %config«docs»;
+        $markdown-path           = $markdown-path // %config«markdown-path»;
+        $markdown-path-alt       = $markdown-path-alt // %config«markdown-path-alt» // Str;
+        $only-app                = $only-app ?? $only-app !! %config«only-app» // $only-app;
+        $separate-markdown-files = $separate-markdown-files ?? $separate-markdown-files !! %config«separate-markdown-files» // $separate-markdown-files;
+        @additional-pod-files    = @additional-pod-files ?? |@additional-pod-files !! |%config«additional-pod-files» // |@additional-pod-files;
+        $comment                 = $comment // ~(%config«comment») // 'using doc-n-save';
+    }
+    die "Error: you must supply a name" without $name;
+    $name .=trim;
+    die "Error: you must supply a name" if $name eq '';
     my @candidates;
     my %name-row = type => 'Str', name => 'name', value => $name;
     @candidates.push: %name-row;
-    my %lib-row = type => 'Str', name => 'lib', value => $lib;
+    my %lib-row = type => 'Str', name => 'lib', value => $lib // 'rakulib';
     @candidates.push: %lib-row;
-    my %bin-row = type => 'Str', name => 'bin', value => $bin;
+    my %bin-row = type => 'Str', name => 'bin', value => $bin // 'bin';
     @candidates.push: %bin-row;
-    my %exts-row = type => 'Array', name => 'exts', value => @exts;
+    my %exts-row = type => 'Array', name => 'exts', value => @exts ?? @exts !! <raku rakumod rakudoc>;
     @candidates.push: %exts-row;
-    my %docs-row = type => 'Str', name => 'docs', value => $docs;
+    my %docs-row = type => 'Str', name => 'docs', value => $docs // 'docs';
     @candidates.push: %docs-row;
-    my %markdown-path-row = type => 'Str', name => 'markdown-path', value => $markdown-path;
+    my %markdown-path-row = type => 'Str', name => 'markdown-path', value => $markdown-path // 'README.md';
     @candidates.push: %markdown-path-row;
     my %markdown-path-alt-row = type => 'Str', name => 'markdown-path-alt', value => $markdown-path-alt;
     @candidates.push: %markdown-path-alt-row;
@@ -577,6 +611,7 @@ multi sub MAIN('prompt', 'create', 'config',
         my %config;
         for @result -> %row {
             next without %row«value»;
+            next if %row«value» eq '' && %row«name» ~~ rx/ ^^ 'markdown-path-alt' $$ /;
             my Str:D $name = %row«name»;
             %config{$name} = %row«value»;
         }
@@ -586,16 +621,16 @@ multi sub MAIN('prompt', 'create', 'config',
     }
     exit 1;
 } #`««« multi sub MAIN('prompt', 'create', 'config',
-                     Str $name is copy = Str, 
-                     Str:D :l(:$lib) is copy = 'rakulib',
-                     Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc',
-                     Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+                     Str    $name is copy = Str, 
+                     Str    :l(:$lib) is copy = Str,
+                     Str    :b(:$bin) is copy = Str,
+                     Str    :e(:$exts) = Str,
+                     Str    :d(:$docs) is copy = Str,
+                     Str    :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False,
                      Bool:D :$separate-markdown-files is copy = False, 
-                     Str:D :c(:$comment) is copy = 'using doc-n-save', 
-                     Str   :a(:$markdown-path-alt) = Str,
+                     Str    :c(:$comment) is copy = Str, 
+                     Str    :a(:$markdown-path-alt) = Str,
                      *@additional-pod-files is copy --> Int:D) »»»
 
 =begin pod
@@ -650,17 +685,33 @@ L<Top of Document|#table-of-contents>
 
 =end pod
 
-multi sub MAIN('explicit', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
+                     Str :e(:$exts) = Str, Str :d(:$docs) is copy = Str,
+                     Str :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
-                     Str:D :c(:$comment) = 'using doc-n-save', Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) {
-    $lib = %*ENV«DOC_N_SAVE_LIB» if $lib eq 'rakulib' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
-    $bin = %*ENV«DOC_N_SAVE_BIN» if $bin eq 'bin' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
-    $exts = %*ENV«DOC_N_SAVE_EXT» if $exts  eq 'rakumod:raku:rakudoc' && (%*ENV«DOC_N_SAVE_EXT»:exists) && (%*ENV«DOC_N_SAVE_EXT».IO ~~ :d);
-    $docs = %*ENV«DOC_N_SAVE_DOCS» if $docs eq 'docs' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
-    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $markdown-path eq 'README.md' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
+                     Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) {
+    my Str:D $tmp = $lib // '';
+    $lib   = %*ENV«DOC_N_SAVE_LIB» if $tmp eq '' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
+    $lib //= 'rakulib';
+    $tmp = $bin // '';
+    $bin   = %*ENV«DOC_N_SAVE_BIN» if $tmp eq '' && (%*ENV«DOC_N_SAVE_BIN»:exists) && (%*ENV«DOC_N_SAVE_BIN».IO ~~ :d);
+    $bin //= 'bin';
+    $tmp = $exts // '';
+    $exts = %*ENV«DOC_N_SAVE_EXT» if $exts  eq '' && (%*ENV«DOC_N_SAVE_EXT»:exists) && (%*ENV«DOC_N_SAVE_EXT».IO ~~ :d);
+    $exts //= 'rakumod:raku:rakudoc';
+    $tmp = $docs // '';
+    $docs = %*ENV«DOC_N_SAVE_DOCS» if $tmp eq '' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
+    $docs //= 'docs';
+    $tmp = $markdown-path // '';
+    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
                                                                                                 && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH».IO ~~ :d);
+    $markdown-path //= 'README.md';
+    $tmp = $markdown-path-alt // '';
+    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT».IO ~~ :d);
+    my @tmp = |@additional-pod-files;
+    @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
+                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
     my @exts = $exts.split(':');
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
                         $separate-markdown-files, $comment, $markdown-path-alt, @additional-pod-files) {
@@ -668,8 +719,8 @@ multi sub MAIN('explicit', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str
     } else {
         exit 1;
     }
-} #`««« multi sub MAIN('explicit', Str:D $name, Str:D :l(:$lib) is copy = 'rakulib', Str:D :b(:$bin) is copy = 'bin',
-                     Str:D :e(:$exts) = 'rakumod:raku:rakudoc', Str:D :d(:$docs) is copy = 'docs',
-                     Str:D :m(:$markdown-path) is copy = 'README.md',
+} #`««« multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
+                     Str :e(:$exts) = Str, Str :d(:$docs) is copy = Str,
+                     Str :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
-                     Str:D :c(:$comment) = 'using doc-n-save'Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) »»»
+                     Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) »»»
