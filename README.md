@@ -49,7 +49,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.19
+0.1.20
 
 TITLE
 =====
@@ -261,66 +261,6 @@ Usage:
       * **do-n-save actually uses a date time and the comment field as the commit comment, (i.e. *$comment $datetime*)**.
 
         * Where $comment is the comment you set, and $datetime is a full ISO 8601 timestamp notation, including nano seconds and timezone offset. (i.e. 2024-02-23T06:10:30.2387654+11:00)
-
-[Top of Document](#table-of-contents)
-
-Mk-Raku-Dirs.raku
------------------
-
-Mk-Raku-Dirs 
--------------
-
-A **Raku** program for either create a full skeleton repository from a few simple arguments or make sure that an existing repository is complete. 
-
-```bash
-mk-raku-dirs --help
-Usage:
-  mk-raku-dirs empty <name> [<additional-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-d|--docs=<Str>] [-T|--tags=<Str>] [-p|--depends=<Str>] [-t|--test=<Str>] [--test-depends=<Str>] [--git-dir=<Str>] [-m|--markdown-path=<Str>] [-c|--comment|--git-comment=<Str>] [-a|--application|--app] [-o|--only-app] [-D|--description=<Str>] [--git-url=<Str>] [-u|--git-user=<Str>] [-e|--email=<Str>] [-U|--git-username=<Str>] [--zef-auth=<Str>]
-  mk-raku-dirs here <name> [<additional-files> ...] [-l|--lib=<Str>] [-b|--bin=<Str>] [-d|--docs=<Str>] [-T|--tags=<Str>] [-p|--depends=<Str>] [-t|--test=<Str>] [--test-depends=<Str>] [--git-dir=<Str>] [-m|--markdown-path=<Str>] [-c|--comment|--git-comment=<Str>] [-a|--application|--app] [-o|--only-app] [-D|--description=<Str>] [-u|--git-user=<Str>] [-e|--email=<Str>] [-U|--git-username=<Str>] [--zef-auth=<Str>]
-```
-
-[Top of Document](#table-of-contents)
-
-release.raku
-------------
-
-release
--------
-
-A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
-
-**Note: I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit**.
-
-```bash
-release_d --help
-Usage:
-  release_d
-```
-
-[Top of Document](#table-of-contents)
-
-release-d.raku 
----------------
-
-release-d 
-----------
-
-release_d 
-----------
-
-A **Raku** program to fez upload programs or modules to zef and update the the git repositories release tags. 
-
-**Note1: you will need a *archive/* directory for this best put it in your *.gitignore* as those archieve files get too big**.
-
-**Note2:** This uses git archive to get around a fez/zef update bug.
-
-**Note3:** I found the original release.raku on the web somewhere in [raku.land](https://raku.land/), if you are the originator please claim it so I can give credit.
-
-```bash
-release-d --help
-Usage:
-  release-d
-```
 
 [Top of Document](#table-of-contents)
 

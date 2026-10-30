@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.19
+=VERSION 0.1.20
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -353,20 +353,22 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
         exit 1;
     }
     my $json = ".doc-n-save.json".IO.slurp;
-    my %config                         = from-json $json;
-    my Str:D  $name                    = %config«name»;
-    my Str:D  $lib                     = %config«lib»;
-    my Str:D  $bin                     = %config«bin»;
-    my Str:D  @exts                    = |%config«exts»;
-    my Str:D  $docs                    = %config«docs»;
-    my Str:D  $markdown-path           = %config«markdown-path»;
+    my        %config                  = from-json $json;
+    my Str    $name                    = %config«name»;
+    die "Error: name must be supplied." without $name;
+    $name .=trim;
+    die "Error: name must be supplied." if $name eq '';
+    my Str    $lib                     = %config«lib»           // 'rakulib';
+    my Str    $bin                     = %config«bin»           // 'bin';
+    my Str    @exts                    = |@(%config«exts») with %config«exts»;
+    my Str    $docs                    = %config«docs»          // 'docs';
+    my Str    $markdown-path           = %config«markdown-path» // 'README.md';
     my Str    $markdown-path-alt       = %config«markdown-path-alt» // Str;
-    my Bool:D $only-app                = %config«only-app»;
-    my Bool:D $separate-markdown-files = %config«separate-markdown-files»;
-    my Str:D  @additional-pod-files    = |%config«additional-pod-files»;
-    without $comment {
-        $comment                       = ~%config«comment»;
-    }
+    my Bool   $only-app                = %config«only-app»          // False;
+    my Bool   $separate-markdown-files = %config«separate-markdown-files» // False;
+    my Str    @additional-pod-files    = |@(%config«additional-pod-files») without %config«additional-pod-files»;
+    $comment                         //= ~(%config«comment») // Str;
+    $comment                         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
                         $separate-markdown-files, $comment, $markdown-path-alt, @additional-pod-files) {
         exit 0;
@@ -452,8 +454,9 @@ multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str
     $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT»:exists)
                                                                                                 && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT».IO ~~ :d);
     my @tmp = |@additional-pod-files;
-    @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
+    @additional-pod-files   = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
                                                                                              && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
+    $comment              //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     my @exts = $exts.split(':');
     unless $only-app || $lib.IO ~~ :d {
         die "Error: $lib does not exist or is not a directory";
@@ -713,6 +716,7 @@ multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bi
     @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
                                                                                              && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
     my @exts = $exts.split(':');
+    $comment         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
                         $separate-markdown-files, $comment, $markdown-path-alt, @additional-pod-files) {
         exit 0;
