@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.24
+=VERSION 0.1.25
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -221,7 +221,7 @@ sub make-n-save-docs(Str:D $name,
     $markdown-path.IO.spurt($markdown-content);
     with $markdown-path-alt {
         my Str:D $tmp = $markdown-path-alt.trim;
-        $tmp.IO.dirname.IO.mkdir() unless $tmp eq '' || $tmp.IO.dirname.IO.path eq '.';
+        $tmp.IO.dirname.IO.mkdir() unless $tmp eq '' || $tmp.IO.dirname eq '.';
         $tmp.IO.spurt($markdown-content);
     }
     return False if $p3.exitcode != 0;
