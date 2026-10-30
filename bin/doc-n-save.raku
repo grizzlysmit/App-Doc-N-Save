@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.20
+=VERSION 0.1.21
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -447,15 +447,15 @@ multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str
     $docs = %*ENV«DOC_N_SAVE_DOCS» if $tmp eq '' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
     $docs //= 'docs';
     $tmp = $markdown-path // '';
-    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
-                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH».IO ~~ :d);
+    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN_PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH».IO ~~ :d);
     $markdown-path //= 'README.md';
     $tmp = $markdown-path-alt // '';
-    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT»:exists)
-                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT».IO ~~ :d);
+    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT».IO ~~ :d);
     my @tmp = |@additional-pod-files;
-    @additional-pod-files   = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
-                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
+    @additional-pod-files   = |(%*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES»:exists)
+                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
     $comment              //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     my @exts = $exts.split(':');
     unless $only-app || $lib.IO ~~ :d {
@@ -706,15 +706,15 @@ multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bi
     $docs = %*ENV«DOC_N_SAVE_DOCS» if $tmp eq '' && (%*ENV«DOC_N_SAVE_DOCS»:exists) && (%*ENV«DOC_N_SAVE_DOCS».IO ~~ :d);
     $docs //= 'docs';
     $tmp = $markdown-path // '';
-    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN-PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH»:exists)
-                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH».IO ~~ :d);
+    $markdown-path = %*ENV«DOC_N_SAVE_MARKDOWN_PATH» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH».IO ~~ :d);
     $markdown-path //= 'README.md';
     $tmp = $markdown-path-alt // '';
-    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT»:exists)
-                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN-PATH-ALT».IO ~~ :d);
+    $markdown-path-alt = %*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT» if $tmp eq '' && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT»:exists)
+                                                                                                && (%*ENV«DOC_N_SAVE_MARKDOWN_PATH_ALT».IO ~~ :d);
     my @tmp = |@additional-pod-files;
-    @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES»:exists)
-                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL-POD-FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
+    @additional-pod-files = |(%*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES».grep( { .IO ~~ :d } )) if @tmp && (%*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES»:exists)
+                                                                                             && %*ENV«DOC_N_SAVE_ADDITIONAL_POD_FILES».map( { .IO ~~ :d } ).reduce: :infix<||>;
     my @exts = $exts.split(':');
     $comment         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
