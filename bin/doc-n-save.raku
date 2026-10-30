@@ -192,6 +192,7 @@ sub make-n-save-docs(Str:D $name,
         }
     } 
     my Str:D $man-number = '1';
+    $pod = $pod1;
     given $pod { 
         when rx/ '.rakumod' $$ / { $man-number = '3'; }
         when rx/ '.raku'    $$ / { $man-number = '1'; }
@@ -202,7 +203,6 @@ sub make-n-save-docs(Str:D $name,
     $man-path.IO.dirname.IO.mkdir();
     my Str:D $html-path = "$docs/{$pod}.html";
     $html-path.IO.dirname.IO.mkdir();
-    $pod = $pod1;
     "raku --doc=Man $pod  > $man-path".say;
     my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
     my $man-content = $p1.out.slurp: :close;
@@ -220,7 +220,8 @@ sub make-n-save-docs(Str:D $name,
     $markdown-path.IO.dirname.IO.mkdir() unless $markdown-path.IO.dirname.Str eq '';
     $markdown-path.IO.spurt($markdown-content);
     with $markdown-path-alt {
-        $markdown-path-alt.IO.dirname.IO.mkdir() unless $markdown-path-alt.IO.dirname.Str eq '';
+        $markdown-path-alt .=trim;
+        $markdown-path-alt.IO.dirname.IO.mkdir() unless $markdown-path-alt eq '' || $markdown-path-alt.IO.dirname.path eq '.';
         $markdown-path-alt.IO.spurt($markdown-content);
     }
     return False if $p3.exitcode != 0;
