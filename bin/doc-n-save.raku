@@ -137,7 +137,7 @@ sub make-n-save-docs(Str:D $name,
         }
     }
     $pod ~~ s:g!'::'!/!;
-    #dd $pod, @exts;
+    dd $pod, @exts;
     my Str:D $pod1 = '';
     if !@exts {
         if $lib.IO ~~ :d && "$lib/{$pod}.rakumod".IO ~~ :f {
@@ -187,8 +187,15 @@ sub make-n-save-docs(Str:D $name,
             die $msg;
         }
     } 
-    my Str:D $man-path = "$docs/{$pod}.1";
+    my Str:D $man-number = '1';
+    given $pod { 
+        when rx/ '.rakumod' $$ / { $man-number = '3'; }
+        when rx/ '.raku'    $$ / { $man-number = '1'; }
+    }
+    my Str:D $man-path = "$docs/{$pod}.$man-number";
+    $man-path.IO.dirname.IO.mkdir();
     my Str:D $html-path = "$docs/{$pod}.html";
+    $html-path.IO.dirname.IO.mkdir();
     $pod = $pod1;
     "raku --doc=Man $pod  > $man-path".say;
     my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
@@ -204,6 +211,7 @@ sub make-n-save-docs(Str:D $name,
     my Proc $p3 = run 'raku', '--doc=Markdown', $pod, :out;
     my $markdown-content = $p3.out.slurp: :close;
     $markdown-path.IO.spurt($markdown-content);
+    $markdown-path.IO.dirname.IO.mkdir() unless $markdown-path.IO.dirname.Str eq '';
     return False if $p3.exitcode != 0;
     for @additional-pod-files -> $additional-pod-file {
         $pod = $additional-pod-file;
@@ -242,7 +250,11 @@ sub make-n-save-docs(Str:D $name,
             }
         } 
         $pod = $pod1;
-        $man-path = "$docs/{$additional-pod-file}.1";
+        given $pod { 
+            when rx/ '.rakumod' $$ / { $man-number = '3'; }
+            when rx/ '.raku'    $$ / { $man-number = '1'; }
+        }
+        $man-path = "$docs/{$additional-pod-file}.$man-number";
         $html-path = "$docs/{$additional-pod-file}.html";
         if $separate-markdown-files {
             $markdown-path = "$docs/{$additional-pod-file}/README.md";
@@ -350,7 +362,7 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
     } else {
         exit 1;
     }
-} #`««« multi sub MAIN(--> Int:D) »»»
+} #`««« multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) »»»
 
 =begin pod
 
