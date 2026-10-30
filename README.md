@@ -49,7 +49,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.18
+0.1.19
 
 TITLE
 =====
