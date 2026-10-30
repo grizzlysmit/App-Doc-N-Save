@@ -192,8 +192,7 @@ sub make-n-save-docs(Str:D $name,
         }
     } 
     my Str:D $man-number = '1';
-    $pod = $pod1;
-    given $pod { 
+    given $pod1 { 
         when rx/ '.rakumod' $$ / { $man-number = '3'; }
         when rx/ '.raku'    $$ / { $man-number = '1'; }
     }
@@ -203,6 +202,7 @@ sub make-n-save-docs(Str:D $name,
     $man-path.IO.dirname.IO.mkdir();
     my Str:D $html-path = "$docs/{$pod}.html";
     $html-path.IO.dirname.IO.mkdir();
+    $pod = $pod1;
     "raku --doc=Man $pod  > $man-path".say;
     my Proc $p1 = run 'raku', '--doc=Man', $pod, :out;
     my $man-content = $p1.out.slurp: :close;
@@ -262,7 +262,7 @@ sub make-n-save-docs(Str:D $name,
             }
         } 
         $pod = $pod1;
-        given $additional-pod-file { 
+        given $pod1 { 
             when rx/ '.rakumod' $$ / { $man-number = '3'; }
             when rx/ '.raku'    $$ / { $man-number = '1'; }
         }
