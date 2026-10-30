@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.21
+=VERSION 0.1.22
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -196,7 +196,9 @@ sub make-n-save-docs(Str:D $name,
         when rx/ '.rakumod' $$ / { $man-number = '3'; }
         when rx/ '.raku'    $$ / { $man-number = '1'; }
     }
+    dd $man-number, $pod;
     my Str:D $man-path = "$docs/{$pod}.$man-number";
+    dd $man-path;
     $man-path.IO.dirname.IO.mkdir();
     my Str:D $html-path = "$docs/{$pod}.html";
     $html-path.IO.dirname.IO.mkdir();
@@ -259,7 +261,7 @@ sub make-n-save-docs(Str:D $name,
             }
         } 
         $pod = $pod1;
-        given $pod { 
+        given $additional-pod-file { 
             when rx/ '.rakumod' $$ / { $man-number = '3'; }
             when rx/ '.raku'    $$ / { $man-number = '1'; }
         }
