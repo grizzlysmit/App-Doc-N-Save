@@ -30,11 +30,11 @@ Table of Contents
 
         * [doc-n-save explicit](#doc-n-save-explicit)
 
-    * [mk-raku-dirs](#mk-raku-dirs)
+    * [mk-raku-dirs](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/mk-raku-dirs#readme)
 
-    * [release](#release)
+    * [release](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release#readme)
 
-    * [release-d](#release-d)
+    * [release-d](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release-d#readme)
 
 NAME
 ====

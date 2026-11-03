@@ -30,9 +30,9 @@ Table of Contents
 =item4 L<doc-n-save create config|#doc-n-save-create-config>
 =item4 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
 =item4 L<doc-n-save explicit|#doc-n-save-explicit>
-=item2 L<mk-raku-dirs|#mk-raku-dirs>
-=item2 L<release|#release>
-=item2 L<release-d|#release-d>
+=item2 L<mk-raku-dirs|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/mk-raku-dirs#readme>
+=item2 L<release|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release#readme>
+=item2 L<release-d|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release-d#readme>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)

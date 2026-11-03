@@ -11,7 +11,14 @@
         "Gzz::Text::Utils"
     ],
     "provides" : {
-        "App::Doc-N-Save" : "bin/doc-n-save.raku"
+        "doc-n-save.raku" :   "bin/doc-n-save.raku",
+        "doc-n-save" :        "bin/doc-n-save",
+        "mk-raku-dirs.raku" : "bin/mk-raku-dirs.raku",
+        "mk-raku-dirs" :      "bin/mk-raku-dirs",
+        "release-d.raku" :    "bin/release-d.raku",
+        "release-d" :         "bin/release-d",
+        "release.raku" :      "bin/release.raku",
+        "release" :           "bin/release"
     },
     "source-url" : "https://github.com/grizzlysmit/App-Doc-N-Save.git",
     "support" : {
