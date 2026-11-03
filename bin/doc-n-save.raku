@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.26
+=VERSION 0.1.27
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -119,6 +119,7 @@ sub make-n-save-docs(Str:D $name,
                      Str:D $markdown-path is copy,
                      Bool:D $only-app is copy,
                      Bool:D $separate-markdown-files, 
+                     Bool:D $separate-pod6-files, 
                      Str:D $comment, 
                      Str   $markdown-path-alt,
                      @additional-pod-files --> Bool:D) {
@@ -327,7 +328,8 @@ sub make-n-save-docs(Str:D $name,
                      Str:D $markdown-path is copy,
                      Bool:D $only-app is copy,
                      Bool:D $separate-markdown-files, 
-                     Str:D $comment,
+                     Bool:D $separate-pod6-files, 
+                     Str:D $comment, 
                      Str   $markdown-path-alt,
                      @additional-pod-files --> Bool:D) »»»
 
@@ -369,11 +371,12 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
     my Str    $markdown-path-alt       = %config«markdown-path-alt» // Str;
     my Bool   $only-app                = %config«only-app»          // False;
     my Bool   $separate-markdown-files = %config«separate-markdown-files» // False;
+    my Bool   $separate-pod6-files     = %config«separate-pod6-files» // False;
     my Str    @additional-pod-files    = |@(%config«additional-pod-files») without %config«additional-pod-files»;
     $comment                         //= ~(%config«comment») // Str;
     $comment                         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
-                        $separate-markdown-files, $comment, $markdown-path-alt, @additional-pod-files) {
+                        $separate-markdown-files, $separate-pod6-files, $comment, $markdown-path-alt, @additional-pod-files) {
         exit 0;
     } else {
         exit 1;
@@ -435,7 +438,9 @@ L<Top of Document|#table-of-contents>
 multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
                      Str :e(:$exts) is copy = Str, Str :d(:$docs) is copy = Str,
                      Str :m(:$markdown-path) is copy = Str,
-                     Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files = False, 
+                     Bool:D :$separate-pod6-files = False, 
                      Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) is copy = Str, *@additional-pod-files is copy --> Int:D) {
     my Str:D $tmp = $lib // '';
     $lib   = %*ENV«DOC_N_SAVE_LIB» if $tmp eq '' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
@@ -472,6 +477,7 @@ multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str
     }
     my %config = name => $name, lib => $lib, bin => $bin, exts => @exts, docs => $docs, markdown-path => $markdown-path, 
                  separate-markdown-files => $separate-markdown-files, 
+                 separate-pod6-files => $separate-pod6-files, 
                  only-app => $only-app, comment => $comment, additional-pod-files => @additional-pod-files;
     %config«markdown-path-alt» = $markdown-path-alt;
     my Str:D $json = to-json %config, :spacing(4);
@@ -479,7 +485,9 @@ multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str
 } #`««« multi sub MAIN('create', 'config', Str $name, Str:D :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
                      Str :e(:$exts) is copy = Str, Str :d(:$docs) is copy = Str,
                      Str :m(:$markdown-path) is copy = Str,
-                     Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files = False, 
+                     Bool:D :$separate-pod6-files = False, 
                      Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) is copy = Str, *@additional-pod-files is copy --> Int:D) »»»
 
 =begin pod
@@ -567,6 +575,7 @@ multi sub MAIN('prompt', 'create', 'config',
                      Str    :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False,
                      Bool:D :$separate-markdown-files is copy = False, 
+                     Bool:D :$separate-pod6-files is copy = False, 
                      Str    :c(:$comment) is copy = Str, 
                      Str    :a(:$markdown-path-alt) = Str,
                      *@additional-pod-files is copy --> Int:D) {
@@ -583,6 +592,7 @@ multi sub MAIN('prompt', 'create', 'config',
         $markdown-path-alt       = $markdown-path-alt // %config«markdown-path-alt» // Str;
         $only-app                = $only-app ?? $only-app !! %config«only-app» // $only-app;
         $separate-markdown-files = $separate-markdown-files ?? $separate-markdown-files !! %config«separate-markdown-files» // $separate-markdown-files;
+        $separate-pod6-files     = $separate-pod6-files ?? $separate-pod6-files !! %config«separate-pod6-files» // $separate-pod6-files;
         @additional-pod-files    = @additional-pod-files ?? |@additional-pod-files !! |%config«additional-pod-files» // |@additional-pod-files;
         $comment                 = $comment // ~(%config«comment») // 'using doc-n-save';
     }
@@ -608,6 +618,8 @@ multi sub MAIN('prompt', 'create', 'config',
     @candidates.push: %only-app-row;
     my %separate-markdown-files-row = type => 'Bool', name => 'separate-markdown-files', value => $separate-markdown-files;
     @candidates.push: %separate-markdown-files-row;
+    my %separate-pod6-files-row = type => 'Bool', name => 'separate-pod6-files', value => $separate-pod6-files;
+    @candidates.push: %separate-pod6-files-row;
     my %comment-row = type => 'Str', name => 'comment', value => $comment;
     @candidates.push: %comment-row;
     my %additional-pod-files-row = type => 'Array', name => 'additional-pod-files', value => @additional-pod-files;
@@ -635,6 +647,7 @@ multi sub MAIN('prompt', 'create', 'config',
                      Str    :m(:$markdown-path) is copy = Str,
                      Bool:D :o(:$only-app) is copy = False,
                      Bool:D :$separate-markdown-files is copy = False, 
+                     Bool:D :$separate-pod6-files is copy = False, 
                      Str    :c(:$comment) is copy = Str, 
                      Str    :a(:$markdown-path-alt) = Str,
                      *@additional-pod-files is copy --> Int:D) »»»
@@ -694,7 +707,9 @@ L<Top of Document|#table-of-contents>
 multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
                      Str :e(:$exts) = Str, Str :d(:$docs) is copy = Str,
                      Str :m(:$markdown-path) is copy = Str,
-                     Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files = False, 
+                     Bool:D :$separate-pod6-files = False, 
                      Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) {
     my Str:D $tmp = $lib // '';
     $lib   = %*ENV«DOC_N_SAVE_LIB» if $tmp eq '' && (%*ENV«DOC_N_SAVE_LIB»:exists) && (%*ENV«DOC_N_SAVE_LIB».IO ~~ :d);
@@ -721,7 +736,7 @@ multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bi
     my @exts = $exts.split(':');
     $comment         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
-                        $separate-markdown-files, $comment, $markdown-path-alt, @additional-pod-files) {
+                        $separate-markdown-files, $separate-pod6-files, $comment, $markdown-path-alt, @additional-pod-files) {
         exit 0;
     } else {
         exit 1;
@@ -729,5 +744,7 @@ multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bi
 } #`««« multi sub MAIN('explicit', Str:D $name, Str :l(:$lib) is copy = Str, Str :b(:$bin) is copy = Str,
                      Str :e(:$exts) = Str, Str :d(:$docs) is copy = Str,
                      Str :m(:$markdown-path) is copy = Str,
-                     Bool:D :o(:$only-app) is copy = False, Bool:D :$separate-markdown-files = False, 
+                     Bool:D :o(:$only-app) is copy = False,
+                     Bool:D :$separate-markdown-files = False, 
+                     Bool:D :$separate-pod6-files = False, 
                      Str :c(:$comment) is copy = Str, Str :a(:$markdown-path-alt) = Str, *@additional-pod-files --> Int:D) »»»

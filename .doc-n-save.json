@@ -1,13 +1,12 @@
 {
-    "separate-markdown-files": true,
+    "separate-markdown-files": false,
+    "separate-pod6-files": true,
     "bin": "bin",
     "docs": "doc",
     "lib": "rakulib",
     "name": "doc-n-save",
     "exts": [
-        "rakumod",
-        "raku",
-        "rakudoc"
+        "raku"
     ],
     "only-app": true,
     "markdown-path": "README.md",

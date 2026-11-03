@@ -28,7 +28,7 @@ Table of Contents
 
 =NAME Mk-Raku-Dirs 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.26
+=VERSION 0.1.27
 =TITLE Mk-Raku-Dirs
 =SUBTITLE A B<Raku> program to either create a full skeleton repository,from a few simple arguments or make sure that an existing repository is complete.
 

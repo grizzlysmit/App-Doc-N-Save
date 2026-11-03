@@ -28,7 +28,7 @@ Table of Contents
 
 =NAME release 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.26
+=VERSION 0.1.27
 =TITLE release
 =SUBTITLE program to fez upload programs or modules to zef and update the the git repositories release tags.
 
