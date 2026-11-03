@@ -30,13 +30,13 @@ Table of Contents
 =item4 L<doc-n-save create config|#doc-n-save-create-config>
 =item4 L<doc-n-save prompt create config|#doc-n-save-prompt-create-config>
 =item4 L<doc-n-save explicit|#doc-n-save-explicit>
-=item2 L<mk-raku-dirs|doc/mk-raku-dirs#readme>
-=item2 L<release|doc/release#readme>
-=item2 L<release-d|doc/release-d#readme>
+=item2 L<mk-raku-dirs|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/mk-raku-dirs#readme>
+=item2 L<release|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release#readme>
+=item2 L<release-d|https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release-d#readme>
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.29
+=VERSION 0.1.30
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
