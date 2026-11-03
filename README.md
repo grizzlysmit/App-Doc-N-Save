@@ -30,11 +30,11 @@ Table of Contents
 
         * [doc-n-save explicit](#doc-n-save-explicit)
 
-    * [mk-raku-dirs](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/mk-raku-dirs#readme)
+    * [mk-raku-dirs](doc/mk-raku-dirs#readme)
 
-    * [release](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release#readme)
+    * [release](doc/release#readme)
 
-    * [release-d](https://github.com/grizzlysmit/App-Doc-N-Save/tree/main/doc/release-d#readme)
+    * [release-d](doc/release-d#readme)
 
 NAME
 ====
@@ -49,7 +49,7 @@ Francis Grizzly Smit (grizzly@smit.id.au)
 VERSION
 =======
 
-0.1.28
+0.1.29
 
 TITLE
 =====
