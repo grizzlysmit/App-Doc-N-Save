@@ -5,7 +5,36 @@ use JSON::Fast;
 
 =head2 release-d.raku 
 =head2 release-d 
-=head2 release_d 
+
+=begin head2
+
+Table of Contents
+
+=end head2
+
+=item1 L<NAME|#name>
+=item1 L<AUTHOR|#author>
+=item1 L<VERSION|#version>
+=item1 L<TITLE|#title>
+=item1 L<SUBTITLE|#subtitle>
+=item1 L<COPYRIGHT|#copyright>
+=item1 L<Introduction|#introduction>
+=item2 L<doc-n-save|#doc-n-save-1>
+=item3 In detail
+=item2 L<release|#release>
+
+=NAME release-d 
+=AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
+=VERSION 0.1.26
+=TITLE release-d
+=SUBTITLE A B<Raku> program to fez upload programs or modules to zef and update the the git repositories release tags.
+
+=COPYRIGHT
+GPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE>
+
+L<Top of Document|#table-of-contents>
+
+=head1 Introduction
 
 A B<Raku> program to fez upload programs or modules to zef and update the
 the git repositories release tags. 

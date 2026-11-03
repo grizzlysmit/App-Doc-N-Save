@@ -11,6 +11,34 @@ my %*SUB-MAIN-OPTS;
 =head2 Mk-Raku-Dirs.raku
 =head2 Mk-Raku-Dirs 
 
+=begin head2
+
+Table of Contents
+
+=end head2
+
+=item1 L<NAME|#name>
+=item1 L<AUTHOR|#author>
+=item1 L<VERSION|#version>
+=item1 L<TITLE|#title>
+=item1 L<SUBTITLE|#subtitle>
+=item1 L<COPYRIGHT|#copyright>
+=item1 L<Introduction|#introduction>
+=item2 L<mk-raku-dirs|#mk-raku-dirs>
+
+=NAME Mk-Raku-Dirs 
+=AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
+=VERSION 0.1.26
+=TITLE Mk-Raku-Dirs
+=SUBTITLE A B<Raku> program to either create a full skeleton repository,from a few simple arguments or make sure that an existing repository is complete.
+
+=COPYRIGHT
+GPL V3.0+ L<LICENSE|https://github.com/grizzlysmit/App-Doc-N-Save/blob/main/LICENSE>
+
+L<Top of Document|#table-of-contents>
+
+=head1 Introduction
+
 A B<Raku> program for either create a full skeleton repository
 from a few simple arguments or make sure that an existing repository is complete. 
 

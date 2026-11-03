@@ -1,5 +1,5 @@
 {
-    "separate-markdown-files": false,
+    "separate-markdown-files": true,
     "bin": "bin",
     "docs": "doc",
     "lib": "rakulib",
