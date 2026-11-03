@@ -36,7 +36,7 @@ Table of Contents
 
 =NAME Doc-N-Save 
 =AUTHOR Francis Grizzly Smit (grizzly@smit.id.au)
-=VERSION 0.1.27
+=VERSION 0.1.28
 =TITLE Doc-N-Save
 =SUBTITLE A collection of B<Raku> programs for managing modules and apps in B<Raku>, and do things like summit to zef etc.
 
@@ -266,10 +266,17 @@ sub make-n-save-docs(Str:D $name,
         given $pod1 { 
             when rx/ '.rakumod' $$ / { $man-number = '3'; }
             when rx/ '.raku'    $$ / { $man-number = '1'; }
+            default {
+                given $pod1 {
+                    when rx@ ^^ $bin '/' @ { $man-number = 1; }
+                    when rx@ ^^ $lib '/' @ { $man-number = 2; }
+                    default                { $man-number = 1; }
+                }
+            }
         }
         $man-path = "$docs/{$additional-pod-file}.$man-number";
         $html-path = "$docs/{$additional-pod-file}.html";
-        if $separate-markdown-files {
+        if $separate-markdown-files || $separate-pod6-files {
             "$docs/{$additional-pod-file}".IO.mkdir;
             $markdown-path = "$docs/{$additional-pod-file}/README.md";
         }
@@ -279,7 +286,7 @@ sub make-n-save-docs(Str:D $name,
         $man-path.IO.spurt($man-content);
         if $p1.exitcode != 0 {
             'Failed'.say;
-            next;
+            #next;
         }
         "raku --doc=HTML $pod  > $html-path".say;
         my Proc $p2 = run 'raku', '--doc=HTML', $pod, :out;
@@ -287,18 +294,22 @@ sub make-n-save-docs(Str:D $name,
         $html-path.IO.spurt($html-content);
         if $p2.exitcode != 0 {
             'Failed'.say;
-            next;
+            #next;
         }
-        if $separate-markdown-files {
+        #`«««
+        if $separate-markdown-files || $separate-pod6-files {
             "raku --doc=Markdown $pod  > $markdown-path".say;
         } else {
             "raku --doc=Markdown $pod  >> $markdown-path".say;
         }
+        #»»»
         my Proc $p3 = run 'raku', '--doc=Markdown', $pod, :out;
         my $markdown-content = $p3.out.slurp: :close;
-        if $separate-markdown-files {
+        if $separate-markdown-files || $separate-pod6-files {
+            "raku --doc=Markdown $pod  > $markdown-path".say;
             $markdown-path.IO.spurt($markdown-content);
         } else {
+            "raku --doc=Markdown $pod  >> $markdown-path".say;
             $markdown-path.IO.spurt($markdown-content, :append);
         }
         if $p3.exitcode != 0 {
