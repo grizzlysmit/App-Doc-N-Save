@@ -226,6 +226,7 @@ sub make-n-save-docs(Str:D $name,
         $tmp.IO.spurt($markdown-content);
     }
     return False if $p3.exitcode != 0;
+    dd @additional-pod-files;
     for @additional-pod-files -> $additional-pod-file {
         $pod = $additional-pod-file;
         $pod ~~ s:g!'::'!/!;
@@ -383,7 +384,7 @@ multi sub MAIN(Str :c(:$comment) is copy = Str --> Int:D) {
     my Bool   $only-app                = %config«only-app»          // False;
     my Bool   $separate-markdown-files = %config«separate-markdown-files» // False;
     my Bool   $separate-pod6-files     = %config«separate-pod6-files» // False;
-    my Str    @additional-pod-files    = |@(%config«additional-pod-files») without %config«additional-pod-files»;
+    my Str    @additional-pod-files    = |@(%config«additional-pod-files») with %config«additional-pod-files»;
     $comment                         //= ~(%config«comment») // Str;
     $comment                         //= %*ENV«DOC_N_SAVE_COMMENT» // 'using doc-n-save';
     if make-n-save-docs($name, $lib, $bin, @exts, $docs, $markdown-path, $only-app,
